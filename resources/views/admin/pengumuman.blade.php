@@ -4,18 +4,7 @@
 
 @push('styles')
 <style>
-  /* ===== HEADER ===== */
-  .header-bg {
-    background: url('{{ asset('images/login-bg.png') }}') center/cover no-repeat;
-    height: 230px;
-    position: relative;
-  }
-
-  .header-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.45);
-  }
+  
 
   /* ===== BUTTONS ===== */
   .btn-gradient-outline {
