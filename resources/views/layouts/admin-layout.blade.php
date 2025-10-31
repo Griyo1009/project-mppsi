@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,17 +12,21 @@
   <!-- Bootstrap Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+
   <!-- Custom Styles -->
   <style>
     body {
       background-color: #f8f9fa;
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Ubuntu', sans-serif;
     }
-     .gradient-text {
-    background: linear-gradient(to bottom, #162660, #2D4EC6);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-   }
+
+    .gradient-text {
+      background: linear-gradient(to bottom, #162660, #2D4EC6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
     /* Navbar */
     .navbar-custom {
@@ -65,7 +70,8 @@
       content: "";
       position: absolute;
       left: 0;
-      bottom: -15px; /* atur biar sejajar bottom navbar */
+      bottom: -15px;
+      /* atur biar sejajar bottom navbar */
       width: 100%;
       height: 4px;
       border-radius: 6px;
@@ -96,7 +102,7 @@
     .navbar-custom .nav-item.dropdown .nav-link.active {
       color: #fff !important;
     }
-    
+
     /* Tombol Logout */
     .btn-logout {
       background: #fff;
@@ -189,14 +195,17 @@
         background-size: 163% calc(2vw + 54px);
       }
     }
+
     html::-webkit-scrollbar,
     body::-webkit-scrollbar {
-      display: none;                /* Chrome, Safari, Opera */
+      display: none;
+      /* Chrome, Safari, Opera */
     }
   </style>
 
   @stack('styles')
 </head>
+
 <body class="d-flex flex-column min-vh-100">
 
   <!-- NAVBAR -->
@@ -227,12 +236,15 @@
 
           {{-- Dropdown Profil --}}
           <li class="nav-item dropdown ms-3 ps-3 border-start border-white">
-            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button"
+              data-bs-toggle="dropdown">
               <i class="bi bi-person-circle me-1"></i> Username <i class="bi bi-caret-down-fill ps-2"></i>
             </a>
             <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="userDropdown">
               <li><a class="dropdown-item" href="#">Profil</a></li>
-              <li><hr class="dropdown-divider"></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
               <li>
                 <form action="#" method="POST" class="m-0">
                   @csrf
@@ -272,4 +284,5 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   @stack('scripts')
 </body>
+
 </html>

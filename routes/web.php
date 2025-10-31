@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PengumumanController;
+use App\Http\Controllers\WargaController;
 
 Route::get('/', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
@@ -31,3 +32,5 @@ Route::post('/admin/pengumuman', [PengumumanController::class, 'store'])->name('
 //         return view('admin.home');
 //     });
 // });
+
+Route::get('/warga/homepage', [WargaController::class, 'homepage'])->name('warga.homepage');
