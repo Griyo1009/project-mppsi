@@ -229,7 +229,8 @@
                             href="{{ route('warga.pengumuman') }}">Pengumuman</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::is('materi') ? 'active' : '' }}" href="">Materi</a>
+                        <a class="nav-link {{ Request::is('materi') ? 'active' : '' }}"
+                            href="{{ route('warga.materi') }}">Materi</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ Request::is('warga') ? 'active' : '' }}" href="/admin/warga">Warga</a>

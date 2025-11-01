@@ -14,4 +14,8 @@ class WargaController extends Controller
     {
         return view('warga.pengumuman');
     }
+    public function materi()
+    {
+        return view('warga.materi');
+    }
 }

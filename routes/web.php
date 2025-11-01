@@ -35,3 +35,5 @@ Route::post('/admin/pengumuman', [PengumumanController::class, 'store'])->name('
 
 Route::get('/warga/homepage', [WargaController::class, 'homepage'])->name('warga.homepage');
 Route::get('/warga/pengumuman', [WargaController::class, 'pengumuman'])->name('warga.pengumuman');
+Route::get('/warga/materi', [WargaController::class, 'materi'])->name('warga.materi');
+

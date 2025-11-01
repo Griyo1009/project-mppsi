@@ -1,4 +1,4 @@
-@extends('layouts.navbar-warga')
+@extends('layouts.warga-layout')
 
 @section('page-title', 'HomePage Warga')
 
