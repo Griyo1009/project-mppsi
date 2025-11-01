@@ -74,7 +74,7 @@
 
     </div>
 
-    <hr class="mb-0">
+    <hr class="mb-0" style="height: 2px; background-color: #000000ff; border: none;">
 
     <div class="px-2">
         <h4 class="text-primary ms-2 mb-2">Materi Terbaru</h4>
