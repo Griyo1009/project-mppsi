@@ -8,10 +8,6 @@ use App\Http\Controllers\WargaController;
 
 Route::get('/', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
-Route::get('/login/warga', [AuthController::class, 'showLoginWarga'])->name('login.warga');
-Route::post('/login/warga', [AuthController::class, 'loginWarga'])->name('login.warga.post');
-Route::get('/login/admin', [AuthController::class, 'showLoginAdmin'])->name('login.admin');
-Route::post('/login/admin', [AuthController::class, 'loginAdmin'])->name('login.admin.post');
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
 route::get('/register/warga', [AuthController::class, 'showRegisterWarga'])->name('register.warga');
@@ -38,3 +34,4 @@ Route::post('/admin/pengumuman', [PengumumanController::class, 'store'])->name('
 // });
 
 Route::get('/warga/homepage', [WargaController::class, 'homepage'])->name('warga.homepage');
+Route::get('/warga/pengumuman', [WargaController::class, 'pengumuman'])->name('warga.pengumuman');

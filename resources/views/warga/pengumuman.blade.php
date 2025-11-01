@@ -1,56 +1,26 @@
 @extends('layouts.navbar-warga')
 
-@section('page-title', 'HomePage Warga')
+@section('page-title', 'Pengumuman Warga')
 
 
 @section('content')
 
     <style>
-        .background-atas {
-            position: relative;
-            background: url('{{ asset("images/login-bg.png") }}') center/cover no-repeat;
-            height: 250px;
-            overflow: hidden;
-        }
 
-        .tulisan-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
-            color: white;
-            font-size: 1.5rem;
-            padding-bottom: 30px;
-        }
-
-        .card {
-            border-radius: 10px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            transition: transform 0.2s;
-        }
-
-        .card:hover {
-            transform: translateY(-4px);
-        }
     </style>
 
-    <div class="background-atas">
-        <div class="tulisan-overlay ">
-            Selamat Datang! Warga RT 07
+    <h4 class=" py-3 fw-bold ms-5 text-primary" style="margin-left:8rem;">Pengumuman Terbaru</h4>
+
+    <div class="card" style="width: 20rem;">
+        <div class="card-body ">
+            <h5 class="card-title">Judul Berita Utama</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Deskripsi</h6>
+            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
+                ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                dolore eu fugiat nulla pariatur. </p>
+            <p class="text-end">waktu dan tanggal</p>
         </div>
-    </div>
-
-
-
-
-
-    <div style="background:linear-gradient(#162660,#2D4EC6)">
-        <h4 class="text-white py-3 fw-bold ms-5" style="margin-left:8rem;">Pengumuman Terbaru</h4>
     </div>
 
 
@@ -76,6 +46,19 @@
 
     <hr class="mb-0">
 
+
+
+
+
+
+
+
+
+
+
+
+
+
     <div class="px-2">
         <h4 class="text-primary ms-2 mb-2">Materi Terbaru</h4>
 
@@ -94,4 +77,9 @@
 
         </div>
     </div>
+
+
+
+
+
 @endsection

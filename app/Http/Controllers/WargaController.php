@@ -10,4 +10,8 @@ class WargaController extends Controller
     {
         return view('warga.homepage');
     }
+    public function pengumuman()
+    {
+        return view('warga.pengumuman');
+    }
 }
