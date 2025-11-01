@@ -14,6 +14,10 @@ Route::get('/login/admin', [AuthController::class, 'showLoginAdmin'])->name('log
 Route::post('/login/admin', [AuthController::class, 'loginAdmin'])->name('login.admin.post');
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
+route::get('/register/warga', [AuthController::class, 'showRegisterWarga'])->name('register.warga');
+route::post('/register/warga', [AuthController::class, 'registerWarga'])->name('register.warga.post');
+route::get('/register/admin', [AuthController::class, 'showRegisterAdmin'])->name('register.admin');
+route::post('/register/admin', [AuthController::class, 'registerAdmin'])->name('register.admin.post');
 Route::get('/forgot-password', [AuthController::class, 'showForgotPassword'])->name('password.request');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 

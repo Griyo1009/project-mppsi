@@ -71,19 +71,6 @@
 
     <hr class="mb-0">
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     <div class="px-2">
         <h4 class="text-primary ms-2 mb-2">Materi Terbaru</h4>
 
@@ -102,9 +89,4 @@
 
         </div>
     </div>
-
-
-
-
-
 @endsection

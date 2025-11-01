@@ -39,6 +39,17 @@ class AuthController extends Controller
     public function showForgotPassword() {
         return view('auth.forgot-password');
     }
+    public function showRegisterWarga() {
+        return view('auth.register-warga');
+    }
+    public function registerWarga(Request $request) {
+        // logic registrasi warga di sini
+    }
+    public function showRegisterAdmin() {
+        return view('auth.register-admin');
+    }
 
+    public function registerAdmin(Request $request) {
+        // logic registrasi admin di sini
+    }
 }
-

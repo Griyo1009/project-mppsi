@@ -197,7 +197,7 @@
 
           {{-- text --}}
           <div class="overlay">
-            <img src="{{ asset('images/bahlil.jpg') }}" alt="Logo ERT07" class="overlay-logo mb-2">
+            <img src="{{ asset('images/logo.png') }}" alt="Logo ERT07" class="overlay-logo mb-2">
             <h2 class="fw-bold text-white mb-4">ERT07</h2>
             <p class="text-white">Ingin Mendaftar sebagai Apa?</p>
           </div>
