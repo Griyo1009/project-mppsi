@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Dashboard Admin RT 07')</title>
+    <title>@yield('page-title')</title>
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -222,14 +222,14 @@
                 <ul class="navbar-nav ms-auto align-items-center gap-3">
                     <li class="nav-item ">
                         <a class="nav-link {{--{{ Request::is('/') ? 'active' : '' }}--}} active"
-                            href="/admin/home">Beranda</a>
+                            href="{{ route('warga.homepage') }}">Beranda</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::is('pengumuman') ? 'active' : '' }} "
-                            href="/admin/pengumuman">Pengumuman</a>
+                        <a class="nav-link {{-- {{ Request::is('pengumuman') ? 'active' : '' }} --}} "
+                            href="{{ route('warga.pengumuman') }}">Pengumuman</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::is('materi') ? 'active' : '' }}" href="/admin/materi">Materi</a>
+                        <a class="nav-link {{ Request::is('materi') ? 'active' : '' }}" href="">Materi</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ Request::is('warga') ? 'active' : '' }}" href="/admin/warga">Warga</a>

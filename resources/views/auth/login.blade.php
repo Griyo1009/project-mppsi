@@ -1,19 +1,28 @@
 @extends('layouts.auth-layout')
 
+@section('title', 'Login Warga RT 07')
+
 @section('content')
-  <h4 class="mb-4 fw-bold gradient-text">Sign In</h4>
-  <p class="text-muted">Masuk sebagai</p>
+  <h5 class="mb-4 fw-bold gradient-text">Login</h5>
 
-  <div class="d-grid gap-3">
-    <a href="/login/warga"
-      class="btn btn-gradient-outline">
-      <span>Warga</span>
-    </a>
-    <a href="/login/admin"
-      class="btn btn-gradient-outline">
-      <span>Pengurus RT</span>
-    </a>
-  </div>
+  <form action="{{ route('warga.homepage') }}" method="">
+    @csrf
+    <div class="form-floating mb-3">
+      <input type="" class="form-control" id="username" name="username" placeholder="Username">
+      <label for="username">Username</label>
+    </div>
 
-  <div class="mt-4 mb-5"></div>
+    <div class="form-floating mb-3">
+      <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan kata sandi">
+      <label for="password">Kata Sandi</label>
+    </div>
+
+    <button type="submit" class="btn btn-gradient-outline w-100 mt-2"><span>Masuk</span></button>
+
+    <div class="text-center mt-3">
+      <small>Belum punya akun? <a href="
+                            {{ route('register') }}
+                             " class="fw-semibold gradient-text">Daftar</a></small>
+    </div>
+  </form>
 @endsection

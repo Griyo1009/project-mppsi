@@ -1,10 +1,10 @@
 @extends('layouts.auth-layout')
 
 @section('content')
-    <h4 class="mb-3 fw-bold">Daftar Akun</h4>
+    <h4 class="mb-3 fw-bold text-primary">Daftar Akun</h4>
     <form method="POST" action="
-                {{-- {{ route('register.post') }} --}}
-                 ">
+                              {{-- {{ route('register.post') }} --}}
+                               ">
         @csrf
         <div class="form-floating mb-3">
             <input type="text" class="form-control" id="nik" name="nik" placeholder="NIK" required>
@@ -36,7 +36,7 @@
         <!-- role -->
 
 
-        <button type="submit" class="btn btn-gradient-outline w-100"><span>Daftar</span></button>
+        <button type="submit" class="btn btn-gradient-outline w-100 mb-2"><span>Daftar</span></button>
     </form>
     <button class="btn btn-gradient-outline w-100"><span>Kembali</span></button>
 @endsection
