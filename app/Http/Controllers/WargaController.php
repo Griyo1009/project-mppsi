@@ -22,4 +22,8 @@ class WargaController extends Controller
     {
         return view('warga.lihat-materi');
     }
+    public function profil_warga()
+    {
+        return view('warga.profil-warga');
+    }
 }

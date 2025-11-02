@@ -37,4 +37,5 @@ Route::get('/warga/homepage', [WargaController::class, 'homepage'])->name('warga
 Route::get('/warga/pengumuman', [WargaController::class, 'pengumuman'])->name('warga.pengumuman');
 Route::get('/warga/materi', [WargaController::class, 'materi'])->name('warga.materi');
 Route::get('/warga/lihat-materi', [WargaController::class, 'lihat_materi'])->name('warga.lihat-materi');
+Route::get('/warga/profil-warga', [WargaController::class, 'profil_warga'])->name('warga.profil-warga');
 
