@@ -15,194 +15,186 @@
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
 
     <!-- Custom Styles -->
-    <style>
-        body {
-            background-color: #f8f9fa;
-            font-family: 'Ubuntu', sans-serif;
-        }
+<style>
+  /* ====== BASE ====== */
+  body {
+    background-color: #f8f9fa;
+    font-family: 'Ubuntu', sans-serif;
+  }
 
-        .gradient-text {
-            background: linear-gradient(to bottom, #162660, #2D4EC6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+  .gradient-text {
+    background: linear-gradient(to bottom, #162660, #2D4EC6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 
-        /* Navbar */
-        .navbar-custom {
-            background: linear-gradient(to bottom, #162660, #2D4EC6);
-        }
+  /* ====== NAVBAR ====== */
+  .navbar-custom {
+    position: relative;
+    background: linear-gradient(to bottom, #162660, #2D4EC6);
+    padding: 0;
+  }
 
-        .navbar-custom .nav-link,
-        .navbar-custom .navbar-brand,
-        .navbar-custom .dropdown-toggle {
-            color: #fff !important;
-            font-weight: 500;
-        }
+  .navbar-custom .navbar-brand,
+  .navbar-custom .nav-link,
+  .navbar-custom .dropdown-toggle {
+    color: #fff !important;
+    font-weight: 500;
+  }
 
-        .navbar-custom .nav-link:hover {
-            opacity: 0.85;
-        }
+  .navbar-custom .nav-link {
+    position: relative;
+    color: #fff !important;
+    font-weight: 500;
+    padding-bottom: 0.5rem;
+    transition: all 0.3s ease;
+  }
 
-        .dropdown-menu {
-            border: none;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
+  .navbar-custom .nav-link:hover {
+    opacity: 0.85;
+  }
 
-        /* Navbar active underline menggunakan Bootstrap */
-        /* ====== NAVBAR BASE ====== */
-        .navbar-custom {
-            position: relative;
-            border-bottom: 4px solid transparent;
-        }
+  /* ====== NAVBAR ACTIVE & HOVER LINE ====== */
+  .navbar-custom .nav-link.active::after,
+  .navbar-custom .nav-link:hover::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -15px;
+    width: 100%;
+    height: 4px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+  }
 
-        .navbar-custom .nav-link {
-            position: relative;
-            color: #fff !important;
-            font-weight: 500;
-            padding-bottom: .5rem;
-            transition: all 0.3s ease;
-        }
+  .navbar-custom .nav-link.active::after {
+    background-color: #D0E6FD;
+  }
 
-        /* ====== GARIS AKTIF & HOVER ====== */
-        .navbar-custom .nav-link.active::after,
-        .navbar-custom .nav-link:hover::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: -15px;
-            /* atur biar sejajar bottom navbar */
-            width: 100%;
-            height: 4px;
-            border-radius: 6px;
-            transition: all 0.3s ease;
-        }
+  .navbar-custom .nav-link:hover::after {
+    background-color: rgba(255, 255, 255, 0.4);
+    height: 2px;
+  }
 
-        /* Warna garis aktif */
-        .navbar-custom .nav-link.active::after {
-            background-color: #D0E6FD;
-        }
+  /* ====== NAVBAR DROPDOWN (EXCLUDED EFFECTS) ====== */
+  .navbar-custom .nav-item.dropdown .nav-link::after {
+    content: none !important;
+  }
 
-        /* Warna garis hover */
-        .navbar-custom .nav-link:hover::after {
-            background-color: rgba(255, 255, 255, 0.4);
-            height: 2px;
-        }
+  .navbar-custom .nav-item.dropdown .nav-link:hover {
+    opacity: 1 !important;
+  }
 
-        /* ====== EXCLUDE DROPDOWN USERNAME ====== */
-        /* Hilangkan efek hover & active untuk dropdown username */
-        .navbar-custom .nav-item.dropdown .nav-link::after {
-            content: none !important;
-        }
+  .navbar-custom .nav-item.dropdown .nav-link.active {
+    color: #fff !important;
+  }
 
-        .navbar-custom .nav-item.dropdown .nav-link:hover {
-            opacity: 1 !important;
-        }
+  /* ====== DROPDOWN MENU ====== */
+  .dropdown-menu {
+    border: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
 
-        .navbar-custom .nav-item.dropdown .nav-link.active {
-            color: #fff !important;
-        }
+  /* ====== BUTTONS ====== */
+  .btn-logout {
+    background: #fff;
+    color: #2D4EC6;
+    border-radius: 50px;
+    font-weight: 500;
+    padding: 6px 14px;
+    transition: 0.3s ease;
+  }
 
-        /* Tombol Logout */
-        .btn-logout {
-            background: #fff;
-            color: #2D4EC6;
-            border-radius: 50px;
-            font-weight: 500;
-            padding: 6px 14px;
-            transition: 0.3s ease;
-        }
+  .btn-logout:hover {
+    background: #2D4EC6;
+    color: #fff;
+  }
 
-        .btn-logout:hover {
-            background: #2D4EC6;
-            color: #fff;
-        }
+  .btn-gradient-outline {
+    display: inline-block;
+    font-weight: 600;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    background-image:
+      linear-gradient(white, white),
+      linear-gradient(to bottom, #162660, #2D4EC6);
+    background-origin: padding-box, border-box;
+    background-clip: padding-box, border-box;
+    color: #162660;
+    transition: all 0.3s ease;
+  }
 
-        /* Tombol Outline Gradient */
-        .btn-gradient-outline {
-            display: inline-block;
-            font-weight: 600;
-            border: 2px solid transparent;
-            border-radius: 12px;
-            background-image:
-                linear-gradient(white, white),
-                linear-gradient(to bottom, #162660, #2D4EC6);
-            background-origin: padding-box, border-box;
-            background-clip: padding-box, border-box;
-            color: #162660;
-            transition: all 0.3s ease;
-        }
+  .btn-gradient-outline span {
+    background: linear-gradient(to bottom, #162660, #2D4EC6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: all 0.3s ease;
+  }
 
-        .btn-gradient-outline span {
-            background: linear-gradient(to bottom, #162660, #2D4EC6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            transition: all 0.3s ease;
-        }
+  .btn-gradient-outline:hover {
+    background-image:
+      linear-gradient(to bottom, #162660, #2D4EC6),
+      linear-gradient(to bottom, #162660, #2D4EC6);
+    transform: translateY(-2px);
+  }
 
-        .btn-gradient-outline:hover {
-            background-image:
-                linear-gradient(to bottom, #162660, #2D4EC6),
-                linear-gradient(to bottom, #162660, #2D4EC6);
-            transform: translateY(-2px);
-        }
+  .btn-gradient-outline:hover span {
+    -webkit-text-fill-color: #fff;
+  }
 
-        .btn-gradient-outline:hover span {
-            -webkit-text-fill-color: #fff;
-        }
+  .btn-gradient-outline:active {
+    transform: translateY(0);
+    opacity: 0.9;
+  }
 
-        .btn-gradient-outline:active {
-            transform: translateY(0);
-            opacity: 0.9;
-        }
+  /* ====== FOOTER ====== */
+  footer {
+    background: #D0E6FD;
+    font-size: 0.9rem;
+  }
 
-        /* Footer */
-        footer {
-            background: #D0E6FD;
-            font-size: 0.9rem;
-        }
+  .footer-wave {
+    position: relative;
+    overflow: hidden;
+    background-color: #D0E6FD;
+  }
 
-        /* Footer Wave */
-        .footer-wave {
-            position: relative;
-            overflow: hidden;
-            background-color: #D0E6FD;
-        }
+  /* ====== FOOTER WAVE SVG ====== */
+  .shapedividers_com-1655 {
+    position: relative;
+    overflow: hidden;
+  }
 
-        .shapedividers_com-1655 {
-            position: relative;
-            overflow: hidden;
-        }
+  .shapedividers_com-1655::before {
+    content: '';
+    position: absolute;
+    z-index: 3;
+    pointer-events: none;
+    bottom: -0.1vw;
+    left: -0.1vw;
+    right: -0.1vw;
+    top: -0.1vw;
+    background-repeat: no-repeat;
+    background-size: 163% 54px;
+    background-position: 50% 0%;
+    transform: rotateY(180deg);
+    background-image: url("data:image/svg+xml;charset=utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 35.28 2.17' preserveAspectRatio='none'><path d='M0 1c3.17.8 7.29-.38 10.04-.55 2.75-.17 9.25 1.47 12.67 1.3 3.43-.17 4.65-.84 7.05-.87 2.4-.02 5.52.88 5.52.88V0H0z' fill='%23f8f9fa'/></svg>");
+  }
 
-        .shapedividers_com-1655::before {
-            content: '';
-            position: absolute;
-            z-index: 3;
-            pointer-events: none;
-            background-repeat: no-repeat;
-            bottom: -0.1vw;
-            left: -0.1vw;
-            right: -0.1vw;
-            top: -0.1vw;
-            background-size: 163% 54px;
-            background-position: 50% 0%;
-            transform: rotateY(180deg);
-            background-image: url("data:image/svg+xml;charset=utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 35.28 2.17' preserveAspectRatio='none'><path d='M0 1c3.17.8 7.29-.38 10.04-.55 2.75-.17 9.25 1.47 12.67 1.3 3.43-.17 4.65-.84 7.05-.87 2.4-.02 5.52.88 5.52.88V0H0z' fill='%23f8f9fa'/></svg>");
-        }
+  @media (min-width: 2100px) {
+    .shapedividers_com-1655::before {
+      background-size: 163% calc(2vw + 54px);
+    }
+  }
 
-        @media (min-width: 2100px) {
-            .shapedividers_com-1655::before {
-                background-size: 163% calc(2vw + 54px);
-            }
-        }
+  /* ====== SCROLLBAR HIDE ====== */
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+</style>
+@stack('styles')
 
-        html::-webkit-scrollbar,
-        body::-webkit-scrollbar {
-            display: none;
-            /* Chrome, Safari, Opera */
-        }
-    </style>
-
-    @stack('styles')
 </head>
 
 <body class="d-flex flex-column min-vh-100">
@@ -211,7 +203,7 @@
     <nav class="navbar navbar-expand-lg navbar-custom shadow-sm">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="#">
-                <img style="width: 20px" src="{{ asset('images/logo.png') }}" alt="ERT07" height="35" class="me-2">
+                <img style="width: 35px; height: 60.71px;" src="{{ asset('images/logo.png') }}" alt="ERT07" class="me-2">
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -231,9 +223,6 @@
                     <li class="nav-item">
                         <a class="nav-link {{ Request::is('materi') ? 'active' : '' }}"
                             href="{{ route('warga.materi') }}">Materi</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ Request::is('warga') ? 'active' : '' }}" href="/admin/warga">Warga</a>
                     </li>
 
                     {{-- Dropdown Profil --}}

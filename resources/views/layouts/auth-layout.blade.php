@@ -25,11 +25,12 @@
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
       width: 90%;
       max-width: 380px;
+      position: relative;
     }
 
     /* ================= LEFT SECTION ================= */
 
-    /* Tombol Kembali (Overlay di kiri atas) */
+    /* Tombol Kembali (Desktop) */
     .btn-back {
       position: absolute;
       top: 20px;
@@ -52,6 +53,26 @@
       color: #fff;
     }
 
+    /* Tombol Kembali (Mobile – tampil di dalam card) */
+    .btn-back-mobile {
+      display: none;
+      text-decoration: none;
+      color: #2D4EC6;
+      font-weight: 600;
+      font-size: 0.95rem;
+      position: absolute;
+      top: 15px;
+      left: 20px;
+    }
+
+    .btn-back-mobile i {
+      margin-right: 6px;
+    }
+
+    .btn-back-mobile:hover {
+      text-decoration: underline;
+      color: #162660;
+    }
 
     .left-section {
       height: 100vh;
@@ -59,7 +80,6 @@
       overflow: hidden;
       background: #162660;
       clip-path: ellipse(100% 130% at 0% 50%);
-
     }
 
     .login-image {
@@ -99,7 +119,6 @@
 
     .overlay-logo {
       width: 150px;
-      /* kamu bisa ubah ukuran sesuai desain */
       height: auto;
       display: block;
       margin: 0 auto 10px auto;
@@ -107,7 +126,6 @@
       animation: fadeInUp 0.8s ease-in-out;
     }
 
-    /* Animasi muncul lembut */
     @keyframes fadeInUp {
       from {
         opacity: 0;
@@ -125,6 +143,7 @@
       align-items: center;
       justify-content: center;
       height: 100vh;
+      position: relative;
     }
 
     .gradient-text {
@@ -142,9 +161,7 @@
       border: 2px solid transparent;
       background-image:
         linear-gradient(white, white),
-        /* isi tombol */
         linear-gradient(to bottom, #162660, #2D4EC6);
-      /* border gradient */
       background-origin: padding-box, border-box;
       background-clip: padding-box, border-box;
       color: #162660;
@@ -162,9 +179,7 @@
     .btn-gradient-outline:hover {
       background-image:
         linear-gradient(to bottom, #162660, #2D4EC6),
-        /* sekarang isi = gradient */
         linear-gradient(to bottom, #162660, #2D4EC6);
-      /* border tetap gradient (blend-safe) */
       transform: translateY(-2px);
     }
 
@@ -175,6 +190,26 @@
     .btn-gradient-outline:active {
       transform: translateY(0);
       opacity: 0.9;
+    }
+
+    /* ================= RESPONSIVE ================= */
+    @media (max-width: 768px) {
+      .left-section {
+        display: none;
+      }
+
+      .btn-back {
+        display: none;
+      }
+
+      .btn-back-mobile {
+        display: inline-block;
+      }
+
+      .login-box {
+        width: 90%;
+        padding-top: 50px;
+      }
     }
   </style>
 
@@ -190,12 +225,10 @@
         <div class="image-wrapper">
           <img src="{{ asset('images/login-bg.png') }}" alt="Background ERT07" class="login-image">
 
-          {{-- button back --}}
           <a href="{{ url()->previous() }}" class="btn-back d-flex align-items-center">
             <i class="bi bi-arrow-left me-2"></i> Kembali
           </a>
 
-          {{-- text --}}
           <div class="overlay">
             <img src="{{ asset('images/logo.png') }}" alt="Logo ERT07" class="overlay-logo mb-2">
             <h2 class="fw-bold text-white mb-4">ERT07</h2>
@@ -205,8 +238,12 @@
       </div>
 
       <!-- Kanan -->
-      <div class="col-md-6 d-flex align-items-center justify-content-center">
+      <div class="col-md-6 d-flex align-items-center justify-content-center right-section">
         <div class="login-box text-center">
+          <a href="{{ url()->previous() }}" class="btn-back-mobile">
+            <i class="bi bi-arrow-left"></i> Kembali
+          </a>
+
           @yield('content')
         </div>
       </div>

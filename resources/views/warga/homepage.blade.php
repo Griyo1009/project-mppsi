@@ -2,10 +2,8 @@
 
 @section('page-title', 'HomePage Warga')
 
-
-@section('content')
-
-    <style>
+@push('styles')
+<style>
         .background-atas {
             position: relative;
             background: url('{{ asset("images/login-bg.png") }}') center/cover no-repeat;
@@ -37,21 +35,20 @@
         .card:hover {
             transform: translateY(-4px);
         }
-    </style>
+</style>
+@endpush
 
-    <div class="background-atas">
-        <div class="tulisan-overlay ">
-            Selamat Datang! Warga RT 07
-        </div>
+@section('content')
+<div class="background-atas">
+    <div class="tulisan-overlay ">
+        Selamat Datang! Warga RT 07
     </div>
+</div>
 
 
-
-
-
-    <div style="background:linear-gradient(#162660,#2D4EC6)">
-        <h4 class="text-white py-3 fw-bold ms-5" style="margin-left:8rem;">Pengumuman Terbaru</h4>
-    </div>
+<div style="background:linear-gradient(#162660,#2D4EC6)">
+    <h4 class="text-white py-3 fw-bold ms-5" style="margin-left:8rem;">Pengumuman Terbaru</h4>
+</div>
 
 
     <div class="container mt-4">
