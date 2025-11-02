@@ -8,7 +8,7 @@
   <form action="{{ route('warga.homepage') }}" method="">
     @csrf
     <div class="form-floating mb-3">
-      <input type="" class="form-control" id="username" name="username" placeholder="Username">
+      <input type="text" class="form-control" id="username" name="username" placeholder="Username">
       <label for="username">Username</label>
     </div>
 
@@ -20,9 +20,10 @@
     <button type="submit" class="btn btn-gradient-outline w-100 mt-2"><span>Masuk</span></button>
 
     <div class="text-center mt-3">
-      <small>Belum punya akun? <a href="
-                            {{ route('register') }}
-                             " class="fw-semibold gradient-text">Daftar</a></small>
+      <small>
+        Belum punya akun? 
+        <a href="{{ route('register') }}" class="fw-semibold gradient-text">Daftar</a>
+      </small>
     </div>
   </form>
 @endsection

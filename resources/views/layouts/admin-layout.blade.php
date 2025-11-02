@@ -16,194 +16,238 @@
 
 
   <!-- Custom Styles -->
-  <style>
-    body {
-      background-color: #f8f9fa;
-      font-family: 'Ubuntu', sans-serif;
-    }
+<style>
+  /* ====== BASE ====== */
+body {
+  background-color: #f8f9fa;
+  font-family: 'Ubuntu', sans-serif;
+}
 
-    .gradient-text {
-      background: linear-gradient(to bottom, #162660, #2D4EC6);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+.gradient-text {
+  background: linear-gradient(to bottom, #162660, #2D4EC6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
-    /* Navbar */
-    .navbar-custom {
-      background: linear-gradient(to bottom, #162660, #2D4EC6);
-    }
+/* ====== NAVBAR ====== */
+.navbar-custom {
+  position: relative;
+  background: linear-gradient(to bottom, #162660, #2D4EC6);
+  padding: 0;
+}
 
-    .navbar-custom .nav-link,
-    .navbar-custom .navbar-brand,
-    .navbar-custom .dropdown-toggle {
-      color: #fff !important;
-      font-weight: 500;
-    }
+.navbar-custom .navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.6);
+}
 
-    .navbar-custom .nav-link:hover {
-      opacity: 0.85;
-    }
+.navbar-custom .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
 
-    .dropdown-menu {
-      border: none;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
+.navbar-custom .navbar-brand,
+.navbar-custom .nav-link,
+.navbar-custom .dropdown-toggle {
+  color: #fff !important;
+  font-weight: 500;
+}
 
-    /* Navbar active underline menggunakan Bootstrap */
-    /* ====== NAVBAR BASE ====== */
-    .navbar-custom {
-      position: relative;
-      border-bottom: 4px solid transparent;
-    }
+.navbar-custom .nav-link {
+  position: relative;
+  padding-bottom: .5rem;
+  transition: all 0.3s ease;
+}
 
-    .navbar-custom .nav-link {
-      position: relative;
-      color: #fff !important;
-      font-weight: 500;
-      padding-bottom: .5rem;
-      transition: all 0.3s ease;
-    }
+.navbar-custom .nav-link:hover {
+  opacity: 0.85;
+}
 
-    /* ====== GARIS AKTIF & HOVER ====== */
-    .navbar-custom .nav-link.active::after,
-    .navbar-custom .nav-link:hover::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -15px;
-      /* atur biar sejajar bottom navbar */
-      width: 100%;
-      height: 4px;
-      border-radius: 6px;
-      transition: all 0.3s ease;
-    }
+/* ====== NAVBAR ACTIVE & HOVER EFFECT ====== */
+.navbar-custom .nav-link.active::after,
+.navbar-custom .nav-link:hover::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -15px;
+  width: 100%;
+  height: 4px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
 
-    /* Warna garis aktif */
-    .navbar-custom .nav-link.active::after {
-      background-color: #D0E6FD;
-    }
+.navbar-custom .nav-link.active::after {
+  background-color: #D0E6FD;
+}
 
-    /* Warna garis hover */
-    .navbar-custom .nav-link:hover::after {
-      background-color: rgba(255, 255, 255, 0.4);
-      height: 2px;
-    }
+.navbar-custom .nav-link:hover::after {
+  background-color: rgba(255, 255, 255, 0.4);
+  height: 2px;
+}
 
-    /* ====== EXCLUDE DROPDOWN USERNAME ====== */
-    /* Hilangkan efek hover & active untuk dropdown username */
-    .navbar-custom .nav-item.dropdown .nav-link::after {
-      content: none !important;
-    }
+/* ====== EXCLUDE DROPDOWN USERNAME ====== */
+.navbar-custom .nav-item.dropdown .nav-link::after {
+  content: none !important;
+}
 
-    .navbar-custom .nav-item.dropdown .nav-link:hover {
-      opacity: 1 !important;
-    }
+.navbar-custom .nav-item.dropdown .nav-link:hover {
+  opacity: 1 !important;
+}
 
-    .navbar-custom .nav-item.dropdown .nav-link.active {
-      color: #fff !important;
-    }
+.navbar-custom .nav-item.dropdown .nav-link.active {
+  color: #fff !important;
+}
 
-    /* Tombol Logout */
-    .btn-logout {
-      background: #fff;
-      color: #2D4EC6;
-      border-radius: 50px;
-      font-weight: 500;
-      padding: 6px 14px;
-      transition: 0.3s ease;
-    }
+/* ====== DROPDOWN MENU ====== */
+.dropdown-menu {
+  border: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
 
-    .btn-logout:hover {
-      background: #2D4EC6;
-      color: #fff;
-    }
+/* ====== BUTTONS ====== */
+.btn-logout {
+  background: #fff;
+  color: #2D4EC6;
+  border-radius: 50px;
+  font-weight: 500;
+  padding: 6px 14px;
+  transition: 0.3s ease;
+}
 
-    /* Tombol Outline Gradient */
-    .btn-gradient-outline {
-      display: inline-block;
-      font-weight: 600;
-      border: 2px solid transparent;
-      border-radius: 12px;
-      background-image:
-        linear-gradient(white, white),
-        linear-gradient(to bottom, #162660, #2D4EC6);
-      background-origin: padding-box, border-box;
-      background-clip: padding-box, border-box;
-      color: #162660;
-      transition: all 0.3s ease;
-    }
+.btn-logout:hover {
+  background: #2D4EC6;
+  color: #fff;
+}
 
-    .btn-gradient-outline span {
-      background: linear-gradient(to bottom, #162660, #2D4EC6);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      transition: all 0.3s ease;
-    }
+.btn-gradient-outline {
+  display: inline-block;
+  font-weight: 600;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  background-image:
+    linear-gradient(white, white),
+    linear-gradient(to bottom, #162660, #2D4EC6);
+  background-origin: padding-box, border-box;
+  background-clip: padding-box, border-box;
+  color: #162660;
+  transition: all 0.3s ease;
+}
 
-    .btn-gradient-outline:hover {
-      background-image:
-        linear-gradient(to bottom, #162660, #2D4EC6),
-        linear-gradient(to bottom, #162660, #2D4EC6);
-      transform: translateY(-2px);
-    }
+.btn-gradient-outline span {
+  background: linear-gradient(to bottom, #162660, #2D4EC6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all 0.3s ease;
+}
 
-    .btn-gradient-outline:hover span {
-      -webkit-text-fill-color: #fff;
-    }
+.btn-gradient-outline:hover {
+  background-image:
+    linear-gradient(to bottom, #162660, #2D4EC6),
+    linear-gradient(to bottom, #162660, #2D4EC6);
+  transform: translateY(-2px);
+}
 
-    .btn-gradient-outline:active {
-      transform: translateY(0);
-      opacity: 0.9;
-    }
+.btn-gradient-outline:hover span {
+  -webkit-text-fill-color: #fff;
+}
 
-    /* Footer */
-    footer {
-      background: #D0E6FD;
-      font-size: 0.9rem;
-    }
+.btn-gradient-outline:active {
+  transform: translateY(0);
+  opacity: 0.9;
+}
 
-    /* Footer Wave */
-    .footer-wave {
-      position: relative;
-      overflow: hidden;
-      background-color: #D0E6FD;
-    }
+/* ====== FOOTER ====== */
+footer {
+  background: #D0E6FD;
+  font-size: 0.9rem;
+}
 
-    .shapedividers_com-1655 {
-      position: relative;
-      overflow: hidden;
-    }
+.footer-wave {
+  position: relative;
+  overflow: hidden;
+  background-color: #D0E6FD;
+}
 
-    .shapedividers_com-1655::before {
-      content: '';
-      position: absolute;
-      z-index: 3;
-      pointer-events: none;
-      background-repeat: no-repeat;
-      bottom: -0.1vw;
-      left: -0.1vw;
-      right: -0.1vw;
-      top: -0.1vw;
-      background-size: 163% 54px;
-      background-position: 50% 0%;
-      transform: rotateY(180deg);
-      background-image: url("data:image/svg+xml;charset=utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 35.28 2.17' preserveAspectRatio='none'><path d='M0 1c3.17.8 7.29-.38 10.04-.55 2.75-.17 9.25 1.47 12.67 1.3 3.43-.17 4.65-.84 7.05-.87 2.4-.02 5.52.88 5.52.88V0H0z' fill='%23f8f9fa'/></svg>");
-    }
+/* ====== FOOTER WAVE SVG ====== */
+.shapedividers_com-1655 {
+  position: relative;
+  overflow: hidden;
+}
 
-    @media (min-width: 2100px) {
-      .shapedividers_com-1655::before {
-        background-size: 163% calc(2vw + 54px);
-      }
-    }
+.shapedividers_com-1655::before {
+  content: '';
+  position: absolute;
+  z-index: 3;
+  pointer-events: none;
+  bottom: -0.1vw;
+  left: -0.1vw;
+  right: -0.1vw;
+  top: -0.1vw;
+  background-repeat: no-repeat;
+  background-size: 163% 54px;
+  background-position: 50% 0%;
+  transform: rotateY(180deg);
+  background-image: url("data:image/svg+xml;charset=utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 35.28 2.17' preserveAspectRatio='none'><path d='M0 1c3.17.8 7.29-.38 10.04-.55 2.75-.17 9.25 1.47 12.67 1.3 3.43-.17 4.65-.84 7.05-.87 2.4-.02 5.52.88 5.52.88V0H0z' fill='%23f8f9fa'/></svg>");
+}
 
-    html::-webkit-scrollbar,
-    body::-webkit-scrollbar {
-      display: none;
-      /* Chrome, Safari, Opera */
-    }
-  </style>
+@media (min-width: 2100px) {
+  .shapedividers_com-1655::before {
+    background-size: 163% calc(2vw + 54px);
+  }
+}
 
-  @stack('styles')
+/* ====== HIDE SCROLLBAR ====== */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+
+@media (max-width: 991.98px) {
+  .navbar-custom .navbar-collapse {
+    background: linear-gradient(to bottom, #162660, #2D4EC6);
+    padding: 1rem 1.25rem;
+    border-radius: 16px 16px 16px 16px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    margin: 20px;
+  }
+
+  .navbar-custom .navbar-nav {
+    flex-direction: column !important;
+    align-items: start !important;
+    gap: 0.25rem;
+  }
+
+  .navbar-custom .nav-item {
+    width: 100%;
+  }
+
+  .navbar-custom .nav-link {
+    width: 100%;
+    padding: 0.75rem 0;
+    text-align: start;
+  }
+
+  .navbar-custom .nav-item:last-child .nav-link {
+    border-bottom: none;
+  }
+
+  .navbar-custom .nav-item.dropdown.ms-3.ps-3 {
+    border: none !important;
+    margin-top: 0.5rem;
+    padding-left: 0 !important;
+  }
+
+  .navbar-custom .dropdown-menu {
+    border-radius: 10px;
+    margin-top: 0.5rem;
+  }
+
+  .navbar-collapse.collapse {
+    transition: all 0.35s ease-in-out;
+  }
+}
+
+</style>
+@stack('styles')
+
 </head>
 
 <body class="d-flex flex-column min-vh-100">
@@ -212,7 +256,7 @@
   <nav class="navbar navbar-expand-lg navbar-custom shadow-sm">
     <div class="container">
       <a class="navbar-brand d-flex align-items-center" href="#">
-        <img style="width: 20px" src="{{ asset('images/logo.png') }}" alt="ERT07" height="35" class="me-2">
+        <img style="width: 35px; height: 60.71px;" src="{{ asset('images/logo.png') }}" alt="ERT07" class="me-2">
       </a>
 
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">

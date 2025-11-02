@@ -30,7 +30,7 @@
 
     <div class="container mt-4">
 
-        <h6>baru ditambahkan</h6>
+        <h6>Baru Ditambahkan</h6>
 
         <div class="card mb-1 d-flex flex-row ">
             <div class="px-3 py-3">

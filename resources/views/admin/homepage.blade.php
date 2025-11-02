@@ -16,9 +16,9 @@
 
 @section('content')
   <!-- HEADER -->
-  <div class="header-bg d-flex align-items-center justify-content-center text-white">
+  <div class="header-bg d-flex align-items-end justify-content-center text-white">
     <div class="header-overlay"></div>
-    <div class="position-relative">
+    <div class="position-absolute bottom-0 mb-4 text-center">
       <h4 class="fw-semibold text-white text-shadow">Selamat Datang! Admin RT 07</h4>
     </div>
   </div>
