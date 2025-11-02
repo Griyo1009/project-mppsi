@@ -51,22 +51,28 @@
 </div>
 
 
-<div class="container mt-4">
-{{-- Pengumuman Terbaru, ambil 3 --}}
-    <div class="card mb-1 d-flex flex-row ">
-        <div class="px-3 py-3">
-            <img src="{{ asset('images/warga.png') }}" alt="Pengumuman"
-                style="width:120px; height:120px; aspect-ratio:1/1; object-fit:cover; border-radius:8px;">
+    <div class="container mt-4">
+
+        {{-- Pengumuman Terbaru, ambil 3 --}}
+
+        <div class="card mb-1 d-flex flex-row ">
+            <div class="px-3 py-3">
+                <img src="{{ asset('images/warga.png') }}" alt="Pengumuman"
+                    style="width:120px; height:120px; aspect-ratio:1/1; object-fit:cover; border-radius:8px;">
+            </div>
+            <div class="card-body pt-4 mb-2">
+                <h5 class="card-title  fw-bold my-3">Ngaji di Rumah Pak Ahmad
+                </h5>
+                <p class="card-text mb-0">Dilaksanakan pada : Sabtu, 18.00 WIB</p>
+                <p class="card-text mb-0">Tempat : Rumah Pak Ahmad</p>
+            </div>
         </div>
-        <div class="card-body pt-4 mb-2">
-            <h5 class="card-title  fw-bold my-3">Ngaji di Rumah Pak Ahmad
-            </h5>
-            <p class="card-text mb-0">Dilaksanakan pada : Sabtu, 18.00 WIB</p>
-            <p class="card-text mb-0">Tempat : Rumah Pak Ahmad</p>
-        </div>
+
+
     </div>
-</div>
- <hr class="mb-0">
+
+    <hr class="mb-0" style="height: 2px; background-color: #000000ff; border: none;">
+
     <div class="px-2">
         <h4 class="text-primary ms-2 mb-2">Materi Terbaru</h4>
 
