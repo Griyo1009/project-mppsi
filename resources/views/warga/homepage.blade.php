@@ -45,12 +45,9 @@
     </div>
 </div>
 
-
 <div style="background:linear-gradient(#162660,#2D4EC6)">
     <h4 class="text-white py-3 fw-bold ms-5" style="margin-left:8rem;">Pengumuman Terbaru</h4>
 </div>
-
-
     <div class="container mt-4">
 
         {{-- Pengumuman Terbaru, ambil 3 --}}
@@ -86,9 +83,86 @@
                     <a href="#" class="btn btn-primary btn-sm" style="width: 125px;">Buka</a>
                 </div>
             </div>
-
-
-
+            <div class="card materi-card py-2 px-2" style="width:175px; flex: 0 0 auto;">
+                <img src="{{ asset('images/warga.png') }}"
+                    style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:8px;" alt="Materi">
+                <div class="card-body text-center">
+                    <h6 class="card-title">Materi</h6>
+                    <a href="#" class="btn btn-primary btn-sm" style="width: 125px;">Buka</a>
+                </div>
+            </div>
+            <div class="card materi-card py-2 px-2" style="width:175px; flex: 0 0 auto;">
+                <img src="{{ asset('images/warga.png') }}"
+                    style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:8px;" alt="Materi">
+                <div class="card-body text-center">
+                    <h6 class="card-title">Materi</h6>
+                    <a href="#" class="btn btn-primary btn-sm" style="width: 125px;">Buka</a>
+                </div>
+            </div>
+            <div class="card materi-card py-2 px-2" style="width:175px; flex: 0 0 auto;">
+                <img src="{{ asset('images/warga.png') }}"
+                    style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:8px;" alt="Materi">
+                <div class="card-body text-center">
+                    <h6 class="card-title">Materi</h6>
+                    <a href="#" class="btn btn-primary btn-sm" style="width: 125px;">Buka</a>
+                </div>
+            </div>
+            <div class="card materi-card py-2 px-2" style="width:175px; flex: 0 0 auto;">
+                <img src="{{ asset('images/warga.png') }}"
+                    style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:8px;" alt="Materi">
+                <div class="card-body text-center">
+                    <h6 class="card-title">Materi</h6>
+                    <a href="#" class="btn btn-primary btn-sm" style="width: 125px;">Buka</a>
+                </div>
+            </div>
+            <div class="card materi-card py-2 px-2" style="width:175px; flex: 0 0 auto;">
+                <img src="{{ asset('images/warga.png') }}"
+                    style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:8px;" alt="Materi">
+                <div class="card-body text-center">
+                    <h6 class="card-title">Materi</h6>
+                    <a href="#" class="btn btn-primary btn-sm" style="width: 125px;">Buka</a>
+                </div>
+            </div>
+            <div class="card materi-card py-2 px-2" style="width:175px; flex: 0 0 auto;">
+                <img src="{{ asset('images/warga.png') }}"
+                    style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:8px;" alt="Materi">
+                <div class="card-body text-center">
+                    <h6 class="card-title">Materi</h6>
+                    <a href="#" class="btn btn-primary btn-sm" style="width: 125px;">Buka</a>
+                </div>
+            </div>
+            <div class="card materi-card py-2 px-2" style="width:175px; flex: 0 0 auto;">
+                <img src="{{ asset('images/warga.png') }}"
+                    style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:8px;" alt="Materi">
+                <div class="card-body text-center">
+                    <h6 class="card-title">Materi</h6>
+                    <a href="#" class="btn btn-primary btn-sm" style="width: 125px;">Buka</a>
+                </div>
+            </div>
+            <div class="card materi-card py-2 px-2" style="width:175px; flex: 0 0 auto;">
+                <img src="{{ asset('images/warga.png') }}"
+                    style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:8px;" alt="Materi">
+                <div class="card-body text-center">
+                    <h6 class="card-title">Materi</h6>
+                    <a href="#" class="btn btn-primary btn-sm" style="width: 125px;">Buka</a>
+                </div>
+            </div>
+            <div class="card materi-card py-2 px-2" style="width:175px; flex: 0 0 auto;">
+                <img src="{{ asset('images/warga.png') }}"
+                    style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:8px;" alt="Materi">
+                <div class="card-body text-center">
+                    <h6 class="card-title">Materi</h6>
+                    <a href="#" class="btn btn-primary btn-sm" style="width: 125px;">Buka</a>
+                </div>
+            </div>
+            <div class="card materi-card py-2 px-2" style="width:175px; flex: 0 0 auto;">
+                <img src="{{ asset('images/warga.png') }}"
+                    style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:8px;" alt="Materi">
+                <div class="card-body text-center">
+                    <h6 class="card-title">Materi</h6>
+                    <a href="#" class="btn btn-primary btn-sm" style="width: 125px;">Buka</a>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
