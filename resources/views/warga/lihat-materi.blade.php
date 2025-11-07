@@ -60,8 +60,16 @@
 
     <h4 class=" pt-2" style="margin-left:4rem;">Komentar</h4>
     <hr class="mt-0 mb-0" style="height: 2px; background-color: #000000ff; border: none;">
-    <div class="text-center">Belum ada komentar</div>
-    <!-- pr membuat buble chat -->
+    <div class="text-center py-5">Belum ada komentar</div>
+
+    <!-- repeat sesuai komengtar -->
+
+    <!-- <div class="px-4">
+                        <div class="pt-4 ms-4 ">Komentar Dari Warga 00</div>
+                        <div class="card mb-4 ms-2 ">
+                            <p class="ms-3 mt-2">Paham Pak!!!</p>
+                        </div>
+                    </div> -->
 
     <div class="card shadow-lg px-3 pt-1 mb-4">
         <div class="card-body">

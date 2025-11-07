@@ -26,4 +26,8 @@ class WargaController extends Controller
     {
         return view('warga.profil-warga');
     }
+    public function edit_profil_warga()
+    {
+        return view('warga.edit-profil-warga');
+    }
 }
