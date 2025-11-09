@@ -69,22 +69,7 @@
                     </button>
                     <!-- nanti di bekend di buat supaya ketika menyimpan langsung di arahin ke profil warga -->
                 </div>
-
             </form>
-
-            <!-- ulang sesuai jumlah pengumuman -->
-
-            <!-- ulang sesuai jumlah pengumuman -->
-
         </div>
     </div>
-
-
-
-
-
-
-
-
-
 @endsection

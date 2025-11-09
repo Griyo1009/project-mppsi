@@ -5,7 +5,7 @@
 @section('content')
   <h5 class="mb-4 fw-bold gradient-text">Login</h5>
 
-  <form action="{{ route('warga.homepage') }}" method="">
+  <form action="{{ route('admin.home') }}" method="">
     @csrf
     <div class="form-floating mb-3">
       <input type="text" class="form-control" id="username" name="username" placeholder="Username">
@@ -21,7 +21,7 @@
 
     <div class="text-center mt-3">
       <small>
-        Belum punya akun? 
+        Belum punya akun?
         <a href="{{ route('register') }}" class="fw-semibold gradient-text">Daftar</a>
       </small>
     </div>
