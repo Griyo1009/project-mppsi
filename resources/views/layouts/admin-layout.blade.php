@@ -116,16 +116,27 @@
             background: #2D4EC6;
             color: #fff;
         }
-
+        
+        .btn-light:hover {
+            background: linear-gradient(to bottom, #162660, #2D4EC6);
+            color: white;
+            -webkit-background-clip: unset;
+            -webkit-text-fill-color: white;
+        }
         .btn-gradient-outline {
-            border: 2px solid #162660;
-            border-color: #162660;
+            border: 1px solid #2D4EC6;
+            border-color: #2D4EC6;
             color: #162660;
+            background: linear-gradient(to bottom, #162660, #2D4EC6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .btn-gradient-outline:hover {
             background: linear-gradient(to bottom, #162660, #2D4EC6);
             color: white;
+            -webkit-background-clip: unset;
+            -webkit-text-fill-color: white;
         }
 
         .btn-danger {

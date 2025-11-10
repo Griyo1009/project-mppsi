@@ -25,6 +25,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/pengumuman', [AdminController::class, 'pengumuman'])->name('admin.pengumuman');
     Route::get('/materi', [AdminController::class, 'materi'])->name('admin.materi');
     Route::get('/warga', [AdminController::class, 'warga'])->name('admin.warga');
+    Route::get('/profil', [AdminController::class, 'profil'])->name('admin.profil');
 });
 
 Route::get('/admin/pengumuman', [PengumumanController::class, 'index'])->name('pengumuman.index');

@@ -29,6 +29,10 @@ class AdminController extends Controller
     {
         return view('admin.warga');
     }
+    public function profil()
+    {
+        return view('admin.profil');
+    }
 }
 
 

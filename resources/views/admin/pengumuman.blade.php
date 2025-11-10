@@ -42,36 +42,35 @@
       </div>
   
       <!-- ===== FORM TAMBAH ===== -->
-      <div id="formPengumuman" class="mt-3 d-none">
-        <form action="{{ route('pengumuman.store') }}" method="POST" enctype="multipart/form-data" class="p-3 border rounded bg-light">
-          @csrf
-  
-          <div class="mb-3">
-            <label for="gambar" class="form-label fw-semibold">Unggah Gambar</label>
-            <input type="file" name="gambar" id="gambar" class="form-control" accept="image/*">
-          </div>
-  
-          <div class="mb-3">
-            <label for="judul" class="form-label fw-semibold">Judul</label>
-            <input type="text" name="judul" id="judul" class="form-control" placeholder="Masukkan judul pengumuman" required>
-          </div>
-  
-          <div class="mb-3">
-            <label for="isi" class="form-label fw-semibold">Isi</label>
-            <textarea name="isi" id="isi" class="form-control" rows="4" placeholder="Tulis isi pengumuman..." required></textarea>
-          </div>
-  
-          <div class="mb-5">
-            <label for="tgl_pengumuman" class="form-label fw-semibold">Tanggal</label>
-            <input type="date" name="tgl_pengumuman" id="tgl_pengumuman" class="form-control" value="{{ date('Y-m-d') }}" readonly>
-          </div>
-  
-          <div class="d-flex justify-content-center gap-3">
-            <button type="button" id="cancelForm" class="btn btn-secondary" style="width: 200px;">Batal</button>
-            <button type="submit" class="btn btn-warning text-white" style="width: 200px;">Tambah</button>
-          </div>
-        </form>
-      </div>
+    
+      <form action="{{ route('pengumuman.store') }}" method="POST" enctype="multipart/form-data" class="p-3 border rounded bg-light">
+        @csrf
+
+        <div class="mb-3">
+          <label for="gambar" class="form-label fw-semibold">Unggah Gambar</label>
+          <input type="file" name="gambar" id="gambar" class="form-control" accept="image/*">
+        </div>
+
+        <div class="mb-3">
+          <label for="judul" class="form-label fw-semibold">Judul</label>
+          <input type="text" name="judul" id="judul" class="form-control" placeholder="Masukkan judul pengumuman" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="isi" class="form-label fw-semibold">Isi</label>
+          <textarea name="isi" id="isi" class="form-control" rows="4" placeholder="Tulis isi pengumuman..." required></textarea>
+        </div>
+
+        <div class="mb-5">
+          <label for="tgl_pengumuman" class="form-label fw-semibold">Tanggal</label>
+          <input type="date" name="tgl_pengumuman" id="tgl_pengumuman" class="form-control" value="{{ date('Y-m-d') }}" readonly>
+        </div>
+
+        <div class="d-flex justify-content-center gap-3">
+          <button type="button" id="cancelForm" class="btn btn-secondary" style="width: 200px;">Batal</button>
+          <button type="submit" class="btn btn-warning text-white" style="width: 200px;">Tambah</button>
+        </div>
+      </form>
     </div>
   </div>
 
