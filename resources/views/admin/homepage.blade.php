@@ -10,6 +10,11 @@
     height: 230px;
     position: relative
   }
+  
+  .btn-outline-dark:hover {
+    background-color: white;
+    color: rgb(123, 123, 123);
+  }
 
 </style>
 @endpush

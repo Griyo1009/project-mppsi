@@ -5,274 +5,165 @@
 @push('styles')
 <style>
   body {
-    background-color: #f5f6fa;
-    font-family: 'Poppins', sans-serif;
-  }
-
-  /* Header section */
-  .section-title {
-    font-weight: 700;
-    color: #162660;
-    font-size: 1.1rem;
-    text-transform: uppercase;
-    margin-bottom: 8px;
+    background-color: #f9fAFC;
+    font-family: 'roboto', sans-serif;
   }
 
   /* Section Wrapper */
   .section-box {
-    background: #fff;
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-    margin-bottom: 30px;
-  }
-
-  .section-header {
-    background: linear-gradient(to right, #162660, #2D4EC6);
-    color: white;
-    font-weight: 600;
-    padding: 10px 20px;
-    text-transform: uppercase;
-  }
-
-  /* Table Styles */
-  .custom-table {
-    margin: 0;
   }
 
   .custom-table th {
-    background: linear-gradient(to right, #162660, #2D4EC6);
+    background: linear-gradient(to bottom, #162660, #2D4EC6);
     color: white;
     text-align: center;
     font-weight: 600;
     font-size: 0.95rem;
   }
 
-  .custom-table td {
+  .table-header-gradient {
+    background: linear-gradient(to right, #162660, #2D4EC6);
+    border: none;
+  }
+
+  .table-row {
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .table-row td {
+    border: none;
     text-align: center;
-    vertical-align: middle;
-    font-size: 0.9rem;
   }
 
-  .custom-table tr td {
-    border: 1px solid #ddd;
+  .table-row td:first-child {
+    border-radius: 8px 0 0 8px;
+    padding-left: 15px; /* Menambahkan padding kiri untuk menjauhi sisi */
   }
 
-  /* Buttons */
-  .btn-accept {
-    background-color: #28a745;
-    color: #fff;
-    border: none;
-    padding: 4px 16px;
-    border-radius: 50px;
-    font-weight: 500;
+  .table-row td:last-child {
+    border-radius: 0 8px 8px 0;
+    padding-right: 15px; /* Menambahkan padding kanan untuk menjauhi sisi */
   }
 
-  .btn-accept:hover {
-    background-color: #218838;
-  }
-
-  .btn-decline {
-    background-color: #dc3545;
-    color: #fff;
-    border: none;
-    padding: 4px 16px;
-    border-radius: 50px;
-    font-weight: 500;
-  }
-
-  .btn-decline:hover {
-    background-color: #bb2d3b;
-  }
-
-  .btn-delete {
-    background-color: #dc3545;
-    color: #fff;
-    border: none;
-    padding: 4px 16px;
-    border-radius: 50px;
-    font-weight: 500;
-  }
-
-  .btn-delete:hover {
-    background-color: #bb2d3b;
-  }
-
-  .btn-block {
-    background-color: #198754;
-    color: #fff;
-    border: none;
-    padding: 4px 16px;
-    border-radius: 50px;
-    font-weight: 500;
-  }
-
-  .btn-block:hover {
-    background-color: #146c43;
-  }
-
-  .btn-unblock {
-    background-color: #28a745;
-    color: #fff;
-    border: none;
-    padding: 4px 16px;
-    border-radius: 50px;
-    font-weight: 500;
-  }
-
-  .btn-unblock:hover {
-    background-color: #1e7e34;
-  }
-
-  /* Status badge */
-  .badge-status {
-    padding: 6px 18px;
-    border-radius: 50px;
-    font-weight: 600;
-    font-size: 0.85rem;
-  }
-
-  .badge-active {
-    background-color: #28a745;
-    color: white;
-  }
-
-  .badge-blocked {
-    background-color: #dc3545;
-    color: white;
-  }
-
-  /* Center container */
-  .container-admin {
-    padding: 40px 0;
-  }
-
-  /* Responsive Table */
-  @media (max-width: 768px) {
-    .custom-table th,
-    .custom-table td {
-      font-size: 0.8rem;
-      padding: 6px;
-    }
+  .table {
+    border-collapse: separate;
+    border-spacing: 0 6px;
   }
 </style>
 @endpush
 
 @section('content')
-<div class="container container-admin">
+<div class="container-fluid mx-0 p-0 mb-5">
   <!-- Title -->
-  <h5 class="fw-bold mb-4" style="color: #162660;">KELOLA AKUN</h5>
-
-  <!-- ==================== PERSETUJUAN AKUN ==================== -->
-  <div class="section-box">
-    <div class="section-header d-flex justify-content-between align-items-center">
-      <span>PERSETUJUAN AKUN</span>
+  <div class="section-box mx-0 mb-3 bg-white">
+    <h5 class="fw-bold gradient-text text-uppercase p-3 border-bottom shadow-sm px-3" style="color: #162660;">KELOLA AKUN</h5>
+    <div class="section-header gradient-text fw-bold px-4 py-2 text-center">
+      PERSETUJUAN AKUN
     </div>
-
-    <div class="table-responsive">
-      <table class="table custom-table mb-0">
-        <thead>
-          <tr>
-            <th style="width: 15%">NIK</th>
-            <th>Nama Lengkap</th>
-            <th>Email</th>
-            <th style="width: 20%">Setujui</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>0012345678</td>
-            <td>Username 001</td>
-            <td>tes@gmail.com</td>
-            <td>
-              <button class="btn-decline me-2">Tolak</button>
-              <button class="btn-accept">Terima</button>
-            </td>
-          </tr>
-          <tr>
-            <td>0012345679</td>
-            <td>Username 002</td>
-            <td>tes2@gmail.com</td>
-            <td>
-              <button class="btn-decline me-2">Tolak</button>
-              <button class="btn-accept">Terima</button>
-            </td>
-          </tr>
-          <tr>
-            <td>0012345680</td>
-            <td>Username 003</td>
-            <td>tes3@gmail.com</td>
-            <td>
-              <button class="btn-decline me-2">Tolak</button>
-              <button class="btn-accept">Terima</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- ==================== DAFTAR AKUN ==================== -->
-  <div class="section-box">
-    <div class="section-header">
+    <table class="table custom-table">
+      <thead>
+        <tr>
+          <th style="width: 15%">NIK</th>
+          <th>Nama Lengkap</th>
+          <th>Email</th>
+          <th style="width: 20%">Aksi</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="table-row">
+          <td>0012345678</td>
+          <td>Username 001</td>
+          <td>tes@gmail.com</td>
+          <td>
+            <button class="btn btn-danger btn-sm me-2">Tolak</button>
+            <button class="btn btn-warning btn-sm text-white">Blokir</button>
+          </td>
+        </tr>
+        <tr class="table-row">
+          <td>0012345678</td>
+          <td>Username 001</td>
+          <td>tes@gmail.com</td>
+          <td>
+            <button class="btn btn-danger btn-sm me-2">Tolak</button>
+            <button class="btn btn-success btn-sm text-white">Terima</button>
+          </td>
+        </tr>
+        <tr class="table-row">
+          <td>0012345678</td>
+          <td>Username 001</td>
+          <td>tes@gmail.com</td>
+          <td>
+            <button class="btn btn-danger btn-sm me-2">Tolak</button>
+            <button class="btn btn-success btn-sm text-white">Terima</button>
+          </td>
+        </tr>
+        <tr class="table-row">
+          <td>0012345678</td>
+          <td>Username 001</td>
+          <td>tes@gmail.com</td>
+          <td>
+            <button class="btn btn-danger btn-sm me-2">Tolak</button>
+            <button class="btn btn-success btn-sm text-white">Terima</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="section-header gradient-text fw-bold px-4 py-2 text-center">
       DAFTAR AKUN
     </div>
-
-    <div class="table-responsive">
-      <table class="table custom-table mb-0">
-        <thead>
-          <tr>
-            <th style="width: 15%">NIK</th>
-            <th>Nama Lengkap</th>
-            <th>Email</th>
-            <th>Status</th>
-            <th style="width: 20%">Aksi</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>0012345678</td>
-            <td>Username 001</td>
-            <td>tes@gmail.com</td>
-            <td><span class="badge-status badge-active">Aktif</span></td>
-            <td>
-              <button class="btn-delete me-2">Hapus</button>
-              <button class="btn-block">Blokir</button>
-            </td>
-          </tr>
-          <tr>
-            <td>0012345679</td>
-            <td>Username 002</td>
-            <td>tes2@gmail.com</td>
-            <td><span class="badge-status badge-active">Aktif</span></td>
-            <td>
-              <button class="btn-delete me-2">Hapus</button>
-              <button class="btn-block">Blokir</button>
-            </td>
-          </tr>
-          <tr>
-            <td>0012345680</td>
-            <td>Username 003</td>
-            <td>tes3@gmail.com</td>
-            <td><span class="badge-status badge-blocked">Terblokir</span></td>
-            <td>
-              <button class="btn-delete me-2">Hapus</button>
-              <button class="btn-unblock">Buka</button>
-            </td>
-          </tr>
-          <tr>
-            <td>0012345681</td>
-            <td>Username 004</td>
-            <td>tes4@gmail.com</td>
-            <td><span class="badge-status badge-blocked">Terblokir</span></td>
-            <td>
-              <button class="btn-delete me-2">Hapus</button>
-              <button class="btn-unblock">Buka</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <table class="table custom-table">
+      <thead>
+        <tr>
+          <th style="width: 15%">NIK</th>
+          <th>Nama Lengkap</th>
+          <th>Email</th>
+          <th>Status</th>
+          <th style="width: 20%">Aksi</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="table-row">
+          <td>0012345678</td>
+          <td>Username 001</td>
+          <td>tes@gmail.com</td>
+          <td><span class="badge bg-success">Aktif</span></td>
+          <td>
+            <button class="btn btn-warning btn-sm text-white">Blokir</button>
+          </td>
+        </tr>
+        <tr class="table-row">
+          <td style="width: 15%">0012345679</td>
+          <td>Username 002</td>
+          <td>tes2@gmail.com</td>
+          <td><span class="badge bg-success">Aktif</span></td>
+          <td style="width: 20%">
+            <button class="btn btn-warning btn-sm text-white">Blokir</button>
+          </td>
+        </tr>
+        <tr class="table-row">
+          <td style="width: 15%">0012345680</td>
+          <td>Username 003</td>
+          <td>tes3@gmail.com</td>
+          <td><span class="badge bg-danger">Terblokir</span></td>
+          <td style="width: 20%">
+            <button class="btn btn-success btn-sm">Buka</button>
+          </td>
+        </tr>
+        <tr class="table-row">
+          <td>0012345681</td>
+          <td>Username 004</td>
+          <td>tes4@gmail.com</td>
+          <td><span class="badge bg-danger">Terblokir</span></td>
+          <td>
+            <button class="btn btn-success btn-sm">Buka</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
 @endsection

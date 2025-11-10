@@ -35,5 +35,5 @@
 
     <button type="submit" class="btn btn-gradient-outline w-100 mb-2"><span>Daftar</span></button>
   </form>
-  <button class="btn btn-gradient-outline w-100"><span>Kembali</span></button>
+ 
 @endsection

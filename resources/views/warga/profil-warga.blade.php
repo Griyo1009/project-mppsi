@@ -1,6 +1,6 @@
 @extends('layouts.warga-layout')
 
-@section('page-title', 'Pengumuman Warga')
+@section('page-title', 'User Profile')
 
 @section('content')
 
