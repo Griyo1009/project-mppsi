@@ -64,8 +64,6 @@
                 <p class="card-text mb-0">Tempat : Rumah Pak Ahmad</p>
             </div>
         </div>
-
-
     </div>
 
     <hr class="mb-0" style="height: 2px; background-color: #000000ff; border: none;">

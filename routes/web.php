@@ -41,4 +41,5 @@ Route::get('/warga/pengumuman', [WargaController::class, 'pengumuman'])->name('w
 Route::get('/warga/materi', [WargaController::class, 'materi'])->name('warga.materi');
 Route::get('/warga/lihat-materi', [WargaController::class, 'lihat_materi'])->name('warga.lihat-materi');
 Route::get('/warga/profil-warga', [WargaController::class, 'profil_warga'])->name('warga.profil-warga');
+Route::get('/warga/edit-profil-warga', [WargaController::class, 'edit_profil_warga'])->name('warga.edit-profil-warga');
 
