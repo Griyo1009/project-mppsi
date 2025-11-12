@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Dashboard Admin RT 07')</title>
 
     <!-- Bootstrap -->
@@ -281,7 +282,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-center gap-3">
                     <li class="nav-item ">
-                        <a class="nav-link {{--{{ Request::is('/') ? 'active' : '' }}--}} active"
+                        <a class="nav-link {{--{{ Request::is('/') ? 'active' : '' }}--}} "
                             href="/admin/home">Beranda</a>
                     </li>
                     <li class="nav-item">
@@ -302,7 +303,7 @@
                             <i class="bi bi-person-circle me-1"></i> Username <i class="bi bi-caret-down-fill ps-2"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="userDropdown">
-                            <li><a class="dropdown-item" href="#">Profil</a></li>
+                            <li><a class="dropdown-item" href="/admin/profil">Profil</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
@@ -343,6 +344,7 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @stack('scripts')
 </body>
 

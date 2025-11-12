@@ -6,41 +6,62 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PengumumanController;
 use App\Http\Controllers\WargaController;
 
+// ===== Halaman Awal =====
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
-Route::post('/login', [AuthController::class, 'login']);
-Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
-Route::post('/register', [AuthController::class, 'register']);
-route::get('/register/warga', [AuthController::class, 'showRegisterWarga'])->name('register.warga');
-route::post('/register/warga', [AuthController::class, 'registerWarga'])->name('register.warga.post');
-route::get('/register/admin', [AuthController::class, 'showRegisterAdmin'])->name('register.admin');
-route::post('/register/admin', [AuthController::class, 'registerAdmin'])->name('register.admin.post');
-Route::get('/forgot-password', [AuthController::class, 'showForgotPassword'])->name('password.request');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::prefix('admin')->group(function () {
-    Route::get('/home', [AdminController::class, 'index'])->name('admin.home');
-    Route::get('/pengumuman', [AdminController::class, 'pengumuman'])->name('admin.pengumuman');
-    Route::get('/materi', [AdminController::class, 'materi'])->name('admin.materi');
-    Route::get('/warga', [AdminController::class, 'warga'])->name('admin.warga');
-    Route::get('/profil', [AdminController::class, 'profil'])->name('admin.profil');
+// ===== AUTH SECTION =====
+Route::controller(AuthController::class)->group(function () {
+    // Login & Logout
+    Route::get('/login', 'showLogin')->name('login');
+    Route::post('/login', 'login')->name('login.post');
+    Route::post('/logout', 'logout')->name('logout');
+
+    // Register umum
+    Route::get('/register', 'showRegister')->name('register');
+    Route::post('/register', 'doRegister')->name('register.post');
+
+    Route::get('/register/admin', 'showRegisterAdmin')->name('register.admin');
+    Route::post('/register/admin', 'registerAdmin')->name('register.admin.post');
+
+    // Lupa Password
+    Route::get('/forgot-password', 'showForgotPassword')->name('password.request');
 });
 
-Route::get('/admin/pengumuman', [PengumumanController::class, 'index'])->name('pengumuman.index');
-Route::post('/admin/pengumuman', [PengumumanController::class, 'store'])->name('pengumuman.store');
+// ===== ADMIN SECTION =====
+Route::prefix('admin')->controller(AdminController::class)->group(function () {
+    Route::get('/home', 'index')->name('admin.home');
+    Route::get('/pengumuman', 'pengumuman')->name('admin.pengumuman');
+    Route::get('/materi', 'materi')->name('admin.materi');
+    Route::get('/warga', 'warga')->name('admin.warga');
+    Route::get('/profil', 'profil')->name('admin.profil');
+});
 
-// Route::middleware('auth')->group(function () {
-//     Route::get('/admin/home', function () {
-//         return view('admin.home');
-//     });
-// });
+// ===== PENGUMUMAN ADMIN =====
+Route::prefix('admin/pengumuman')->group(function () {
+    Route::get('/', [PengumumanController::class, 'index'])->name('pengumuman.index');
+    Route::get('/data', [PengumumanController::class, 'fetch'])->name('pengumuman.fetch');
+    Route::post('/', [PengumumanController::class, 'store'])->name('pengumuman.store');
+    Route::get('/{id}', [PengumumanController::class, 'show'])->name('pengumuman.show');
+    Route::put('/{id}', [PengumumanController::class, 'update'])->name('pengumuman.update');
+    Route::delete('/{id}', [PengumumanController::class, 'destroy'])->name('pengumuman.delete');
+});
 
-Route::get('/warga/homepage', [WargaController::class, 'homepage'])->name('warga.homepage');
-Route::get('/warga/pengumuman', [WargaController::class, 'pengumuman'])->name('warga.pengumuman');
-Route::get('/warga/materi', [WargaController::class, 'materi'])->name('warga.materi');
-Route::get('/warga/lihat-materi', [WargaController::class, 'lihat_materi'])->name('warga.lihat-materi');
-Route::get('/warga/profil-warga', [WargaController::class, 'profil_warga'])->name('warga.profil-warga');
-Route::get('/warga/edit-profil-warga', [WargaController::class, 'edit_profil_warga'])->name('warga.edit-profil-warga');
 
+// ===== MATERI ADMIN =====
+Route::prefix('admin/materi')->group(function () {
+    Route::get('/data', [MateriController::class, 'fetch'])->name('materi.fetch');
+    Route::post('/store', [MateriController::class, 'store'])->name('materi.store');
+    Route::put('/update/{id}', [MateriController::class, 'update'])->name('materi.update');
+    Route::delete('/delete/{id}', [MateriController::class, 'destroy'])->name('materi.delete');
+});
+// ===== WARGA SECTION =====
+Route::prefix('warga')->controller(WargaController::class)->group(function () {
+    Route::get('/homepage', 'homepage')->name('warga.homepage');
+    Route::get('/pengumuman', 'pengumuman')->name('warga.pengumuman');
+    Route::get('/materi', 'materi')->name('warga.materi');
+    Route::get('/lihat-materi', 'lihat_materi')->name('warga.lihat-materi');
+    Route::get('/profil-warga', 'profil_warga')->name('warga.profil-warga');
+    Route::get('/edit-profil-warga', 'edit_profil_warga')->name('warga.edit-profil-warga');
+});
