@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PengumumanController;
 use App\Http\Controllers\WargaController;
+use App\Http\Controllers\MateriController;
 
 // ===== Halaman Awal =====
 Route::get('/', function () {
@@ -48,14 +49,17 @@ Route::prefix('admin/pengumuman')->group(function () {
     Route::delete('/{id}', [PengumumanController::class, 'destroy'])->name('pengumuman.delete');
 });
 
-
 // ===== MATERI ADMIN =====
-Route::prefix('admin/materi')->group(function () {
+Route::prefix('admin/materi')->middleware(['auth'])->group(function () {
+    Route::get('/', [MateriController::class, 'index'])->name('materi.index');
     Route::get('/data', [MateriController::class, 'fetch'])->name('materi.fetch');
+    Route::get('/show/{id}', [MateriController::class, 'show'])->name('materi.show'); // <--- tambahan penting
     Route::post('/store', [MateriController::class, 'store'])->name('materi.store');
     Route::put('/update/{id}', [MateriController::class, 'update'])->name('materi.update');
     Route::delete('/delete/{id}', [MateriController::class, 'destroy'])->name('materi.delete');
+    Route::delete('/file/{id}', [MateriController::class, 'destroyFile'])->name('materi.file.delete');
 });
+
 // ===== WARGA SECTION =====
 Route::prefix('warga')->controller(WargaController::class)->group(function () {
     Route::get('/homepage', 'homepage')->name('warga.homepage');

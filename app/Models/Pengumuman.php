@@ -13,7 +13,7 @@ class Pengumuman extends Model
 {
     use HasFactory;
 
-    protected $table = 'pengumuman';
+    protected $table = 'pengumumans';
     protected $primaryKey = 'id_pengumuman';
     public $timestamps = true;
 

@@ -194,13 +194,8 @@
 
     /* ================= RESPONSIVE ================= */
     @media (max-width: 768px) {
-      .left-section {
-        display: none;
-      }
+      
 
-      .btn-back {
-        display: none;
-      }
 
       .btn-back-mobile {
         display: inline-block;
@@ -221,7 +216,7 @@
   <div class="container-fluid h-100">
     <div class="row h-100">
       <!-- Kiri -->
-      <div class="col-md-6 d-none d-md-block p-0 left-section">
+      <div class="col-md-6 d-none d-md-block d-sm-none p-0 left-section">
         <div class="image-wrapper">
           <img src="{{ asset('images/login-bg.png') }}" alt="Background ERT07" class="login-image">
 

@@ -2,17 +2,23 @@
 
 namespace App\Models;
 
+use App\Models\User;
+use App\Models\Komentar;
+use App\Models\MateriFile;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Materi extends Model
 {
     use HasFactory;
 
     protected $primaryKey = 'id_materi';
-    protected $table = 'materi';
+    protected $table = 'materis';
     protected $fillable = [
-        'judul_materi', 'deskripsi', 'tipe_materi', 
-        'file_path', 'link_url', 'tgl_up', 'id_user'
+        'id_user',
+        'judul_materi', 
+        'deskripsi', 
+        'tgl_up'
     ];
 
     public function user()
@@ -23,5 +29,10 @@ class Materi extends Model
     public function komentar()
     {
         return $this->hasMany(Komentar::class, 'id_materi');
+    }
+    
+    public function files()
+    {
+        return $this->hasMany(MateriFile::class, 'id_materi');
     }
 }

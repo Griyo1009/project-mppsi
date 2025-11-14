@@ -9,7 +9,7 @@ class Komentar extends Model
     use HasFactory;
 
     protected $primaryKey = 'id_komentar';
-
+    protected $table = 'komentars';
     protected $fillable = ['tgl_komen', 'isi_komen', 'id_user', 'id_materi'];
 
     public function user()

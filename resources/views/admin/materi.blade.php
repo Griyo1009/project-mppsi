@@ -1,178 +1,263 @@
 @extends('layouts.admin-layout')
 
-@section('title', 'Tambah Materi | Dashboard Admin RT 07')
+@section('title', 'Materi | Dashboard Admin RT 07')
 
 @push('styles')
 <style>
-  body {
-    background-color: #f5f6fa;
-    font-family: 'Roboto', sans-serif;
-  }
-
-  .btn-danger {
-    background: linear-gradient(to bottom, #dc3545, #a71d2a);
-    border-color: #dc3545;
-    width: 100px;
-  }
-
-  .btn-danger:hover {
-    background: linear-gradient(to bottom, #a71d2a, #dc3545);
-    border-color: #a71d2a;
-  }
-
-  .btn-warning {
-    background: linear-gradient(to bottom, #162660, #2D4EC6);
-    border-color: #162660;
-    width: 100px;
-  }
-
-  .form-materi {
-    display: none;
-    background: #f1f3f6;
-    border-radius: 10px;
-    margin-top: 15px;
-    padding: 20px;
-    animation: fadeIn 0.6s ease;
-  }
-
-  .form-materi.show {
-    display: block;
-  }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(-5px);
+    .materi-card {
+        position: relative;
+        border: none;
+        border-radius: 12px;
+        padding: 15px;
+        background: #fff;
+        transition: 0.3s ease;
     }
-    to {
-      opacity: 1;
-      transform: translateY(0);
+
+    .materi-card:hover {
+        box-shadow: 0 4px 12px rgba(45, 78, 198, 0.2);
     }
-  }
 
-  .materi-card {
-    position: relative;
-    border: none;
-    border-radius: 12px;
-    padding: 15px;
-    background: #fff;
-    transition: 0.3s ease;
-  }
+    .file-item {
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 10px;
+        background: #f8f9fa;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
 
-  .materi-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 12px;
-    padding: 2px;
-    background: linear-gradient(to bottom, #162660, #2D4EC6);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-  }
+    .file-item i {
+        font-size: 1.5rem;
+        color: #2D4EC6;
+    }
 
-  .materi-card:hover {
-    box-shadow: 0 4px 12px rgba(45, 78, 198, 0.2);
-  }
 </style>
 @endpush
 
 @section('content')
-<div class="bg-white shadow mt-n5 overflow-hidden position-relative w-100" style="border-radius: 0;">
-  <div class="p-3">
-    <div class="fw-bold fs-6 ms-2" style="color: #162660;">MATERI</div>
-  </div>
-
-  <div class="pb-1 pt-4 mb-4" style="background: linear-gradient(to bottom, #162660, #2D4EC6);">
-    <div class="bg-white shadow-sm rounded mx-4 p-3 mb-4">
-      <div class="d-flex justify-content-between align-items-center flex-wrap">
-        <p class="fw-normal mb-2 mb-sm-0">Materi Baru</p>
-        <button id="toggleFormBtn" class="btn btn-gradient-outline">
-          Tambah <i class="bi bi-plus-circle ms-2"></i>
-        </button>
-      </div>
-
-      <!-- ===== FORM TAMBAH MATERI ===== -->
-      <form id="formMateri" action="{{ route('materi.store') }}" method="POST" enctype="multipart/form-data"
-        class="p-3 border rounded bg-light mt-3 d-none">
-        @csrf
-
-        <div class="mb-3">
-          <label for="file" class="form-label fw-semibold">Unggah File Materi</label>
-          <input type="file" name="file" id="file" class="form-control" accept=".pdf,.doc,.docx,.ppt,.pptx" required>
-        </div>
-
-        <div class="mb-3">
-          <label for="judul" class="form-label fw-semibold">Judul Materi</label>
-          <input type="text" name="judul" id="judul" class="form-control" placeholder="Masukkan judul materi" required>
-        </div>
-
-        <div class="mb-5">
-          <label for="tanggal" class="form-label fw-semibold">Tanggal</label>
-          <input type="date" name="tanggal" id="tanggal" class="form-control" value="{{ date('Y-m-d') }}" readonly>
-        </div>
-
-        <div class="d-flex justify-content-center gap-3">
-          <button type="button" id="cancelForm" class="btn btn-secondary" style="width: 200px;">Batal</button>
-          <button type="submit" class="btn btn-warning text-white" style="width: 200px;">Tambah</button>
-        </div>
-      </form>
+<div class="bg-white shadow mt-n5 overflow-hidden position-relative w-100">
+    <div class="p-3">
+        <div class="fw-bold fs-6 ms-2" style="color: #162660;">MATERI</div>
     </div>
-  </div>
+
+    <div class="pb-1 pt-4 " style="background: linear-gradient(to bottom, #162660, #2D4EC6);">
+        <div class="bg-white shadow-sm rounded mx-4 p-3 mb-4">
+            <div class="d-flex justify-content-between align-items-center flex-wrap">
+                <p class="fw-normal mb-2 mb-sm-0">Materi Baru</p>
+                <button id="toggleFormBtn" class="btn btn-gradient-outline">
+                    Tambah <i class="bi bi-plus-circle ms-2"></i>
+                </button>
+            </div>
+
+            <!-- ===== FORM TAMBAH MATERI ===== -->
+            <form id="formMateri" action="{{ route('materi.store') }}" method="POST" enctype="multipart/form-data"
+                class="p-3 border rounded bg-light mt-3 d-none">
+                @csrf
+                <div class="mb-3">
+                    <label for="judul" class="form-label fw-semibold">Judul Materi</label>
+                    <input type="text" name="judul" id="judul" class="form-control" placeholder="Masukkan judul materi"
+                        required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="deskripsi" class="form-label fw-semibold">Deskripsi Materi</label>
+                    <textarea name="deskripsi" id="deskripsi" rows="3" class="form-control"
+                        placeholder="Tuliskan deskripsi singkat..." required></textarea>
+                </div>
+
+                <div id="fileContainer" class="mb-3">
+                    <label class="form-label fw-semibold">Unggah File Materi</label>
+                    <div class="input-group mb-2 file-input-group">
+                        <input type="file" name="files[]" class="form-control" accept=".pdf,.jpg,.jpeg,.png,.mp4,.doc,.docx,.ppt,.pptx">
+                        <button type="button" class="btn btn-outline-secondary btn-add-file"><i class="bi bi-plus"></i></button>
+                    </div>
+                </div>
+
+                <div id="linkContainer" class="mb-3">
+                    <label class="form-label fw-semibold">Tambahkan Link (YouTube/Drive/Web)</label>
+                    <div class="input-group mb-2">
+                        <input type="url" name="links[]" class="form-control" placeholder="Masukkan link materi">
+                        <button type="button" class="btn btn-outline-secondary btn-add-link"><i
+                                class="bi bi-plus"></i></button>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-center gap-3">
+                    <button type="button" id="cancelForm" class="btn btn-secondary" style="width: 200px;">Batal</button>
+                    <button type="submit" class="btn btn-warning text-white" style="width: 200px;">Tambah</button>
+                </div>
+            </form>
+            <!-- ===== MODAL EDIT MATERI ===== -->
+            <div class="modal fade" id="editMateriModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-content border-0 rounded-4 shadow-lg">
+                        <div class="modal-header text-white" style="background: linear-gradient(to bottom, #162660, #2D4EC6);">
+                            <h5 class="modal-title">Edit Materi</h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="formEditMateri" enctype="multipart/form-data">
+                                @csrf
+                                <input type="hidden" id="edit_id_materi" name="id_materi">
+
+                                <div class="mb-3">
+                                    <label for="edit_judul" class="form-label fw-semibold">Judul Materi</label>
+                                    <input type="text" id="edit_judul" name="judul_materi" class="form-control"
+                                        required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="edit_deskripsi" class="form-label fw-semibold">Deskripsi</label>
+                                    <textarea id="edit_deskripsi" name="deskripsi" rows="3"
+                                        class="form-control"></textarea>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label fw-semibold">File Tersimpan</label>
+                                    <div id="existingFiles" class="border rounded p-2 bg-light small text-muted">
+                                        <em>Belum ada file.</em>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label fw-semibold">Tambah File Baru (boleh lebih dari
+                                        satu)</label>
+                                    <input type="file" name="files[]" id="edit_files" multiple class="form-control">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label fw-semibold">Tambah / Ubah Link Materi</label>
+                                    <input type="url" name="link_url" id="edit_link_url" class="form-control"
+                                        placeholder="https://...">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                            <button type="submit" form="formEditMateri" class="btn btn-warning text-white" style="width: 200px;">Simpan
+                                Perubahan</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </div>
 
-<!-- ===== LIST MATERI BARU ===== -->
-<div class="container my-5">
-  <h6 class="fw-bold mb-4 text-uppercase text-muted">Baru Ditambahkan</h6>
+<!-- ===== LIST MATERI ===== -->
+<div class="container mt-5 mx-6" id="listMateri">
+    <h6 class="fw-bold mb-3 text-uppercase text-muted">Daftar Materi</h6>
 
-  @forelse($materi as $item)
-  <div class="materi-card d-flex flex-wrap align-items-start justify-content-between">
-    <div class="flex-grow-1">
-      <h5 class="fw-bold mb-1">{{ $item->judul }}</h5>
-      <p class="mb-1 text-muted">Jenis File: {{ pathinfo($item->file, PATHINFO_EXTENSION) }}</p>
-      <small class="text-muted">{{ $item->tanggal }}</small>
+    @foreach($materi as $item)
+    <div class="materi-card mb-4">
+        <div class="d-flex justify-content-between align-items-start">
+            <div>
+                <h5 class="fw-bold">{{ $item->judul_materi }}</h5>
+                <p class="text-muted mb-2">{{ $item->deskripsi }}</p>
+                <small class="text-secondary d-block mb-2">Diupload pada {{ $item->tgl_up }}</small>
+            </div>
+
+            <div class="d-flex gap-2 align-self-center">
+                <button class="btn btn-warning text-white btn-sm btn-edit"
+                    data-id="{{ $item->id_materi }}">Edit</button>
+                <button class="btn btn-danger btn-sm btn-delete" data-id="{{ $item->id_materi }}">Hapus</button>
+            </div>
+        </div>
+
+        <div class="mt-3">
+            @foreach($item->files as $f)
+            <div class="file-item">
+                @if($f->tipe_file == 'pdf')
+                <i class="bi bi-file-earmark-pdf"></i>
+                <a href="{{ asset('storage/' . $f->file_path) }}" target="_blank" class="text-decoration-none">Lihat
+                    PDF</a>
+                @elseif($f->tipe_file == 'mp4')
+                <i class="bi bi-play-circle"></i>
+                <a href="{{ asset('storage/' . $f->file_path) }}" target="_blank" class="text-decoration-none">Putar
+                    Video</a>
+                @elseif($f->tipe_file == 'gambar')
+                <i class="bi bi-image"></i>
+                <a href="{{ asset('storage/' . $f->file_path) }}" target="_blank" class="text-decoration-none">Lihat
+                    Gambar</a>
+                @elseif($f->tipe_file == 'link')
+                <i class="bi bi-link-45deg"></i>
+                <a href="{{ $f->link_url }}" target="_blank" class="text-decoration-none">{{ $f->link_url }}</a>
+                @else
+                <i class="bi bi-file-earmark-text"></i>
+                <a href="{{ asset('storage/' . $f->file_path) }}" target="_blank" class="text-decoration-none">Unduh
+                    File</a>
+                @endif
+            </div>
+            @endforeach
+        </div>
     </div>
-
-    <div class="d-flex align-items-center gap-2 mt-3 mt-md-0 align-self-center">
-      <form action="{{ route('materi.destroy', $item->id_materi) }}" method="POST" class="m-0">
-        @csrf
-        @method('DELETE')
-        <button class="btn btn-danger btn-sm">Hapus</button>
-      </form>
-
-      <a href="{{ route('materi.edit', $item->id_materi) }}" class="btn btn-warning text-white px-4 btn-sm">Edit</a>
-    </div>
-  </div>
-  @empty
-  <div class="materi-card">
-    <p class="text-muted m-0">Belum ada materi yang ditambahkan.</p>
-  </div>
-  @endforelse
+    @endforeach
 </div>
 @endsection
 
 @push('scripts')
+<script src="{{ asset('js/materi.js') }}"></script>
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const toggleBtn = document.getElementById('toggleFormBtn');
-    const form = document.getElementById('formMateri');
-    const cancelBtn = document.getElementById('cancelForm');
+    document.addEventListener("DOMContentLoaded", () => {
+        const toggleBtn = document.getElementById("toggleFormBtn");
+        const form = document.getElementById("formMateri");
+        const cancelBtn = document.getElementById("cancelForm");
 
-    if (!toggleBtn || !form || !cancelBtn) return;
+        if (!toggleBtn || !form || !cancelBtn) return;
 
-    toggleBtn.addEventListener('click', () => {
-      form.classList.toggle('d-none');
-      toggleBtn.innerHTML = form.classList.contains('d-none')
-        ? 'Tambah <i class="bi bi-plus-circle ms-2"></i>'
-        : 'Tutup <i class="bi bi-chevron-up ms-2"></i>';
+        toggleBtn.addEventListener("click", () => {
+            form.classList.toggle("d-none");
+            toggleBtn.innerHTML = form.classList.contains("d-none") ?
+                'Tambah <i class="bi bi-plus-circle ms-2"></i>' :
+                'Tutup <i class="bi bi-chevron-up ms-2"></i>';
+        });
+
+        cancelBtn.addEventListener("click", () => {
+            form.classList.add("d-none");
+            toggleBtn.innerHTML = 'Tambah <i class="bi bi-plus-circle ms-2"></i>';
+            form.reset();
+        });
+
+        // Tambah input link baru
+        document.querySelector(".btn-add-link").addEventListener("click", () => {
+            const container = document.getElementById("linkContainer");
+            const newInput = document.createElement("div");
+            newInput.classList.add("input-group", "mb-2");
+            newInput.innerHTML = `
+        <input type="url" name="links[]" class="form-control" placeholder="Masukkan link tambahan">
+        <button type="button" class="btn btn-outline-danger btn-remove-link"><i class="bi bi-dash"></i></button>
+      `;
+            container.appendChild(newInput);
+        });
+
+        // Hapus input link tambahan
+        document.addEventListener("click", (e) => {
+            if (e.target.closest(".btn-remove-link")) {
+                e.target.closest(".input-group").remove();
+            }
+        });
     });
 
-    cancelBtn.addEventListener('click', () => {
-      form.classList.add('d-none');
-      toggleBtn.innerHTML = 'Tambah <i class="bi bi-plus-circle ms-2"></i>';
-      form.reset();
+    // ===== Tambah input file baru =====
+    document.querySelector("#fileContainer")?.addEventListener("click", (e) => {
+        if (e.target.closest(".btn-add-file")) {
+            const container = document.getElementById("fileContainer");
+            const newInput = document.createElement("div");
+            newInput.classList.add("input-group", "mb-2", "file-input-group");
+            newInput.innerHTML = `
+                <input type="file" name="files[]" class="form-control" accept=".pdf,.jpg,.jpeg,.png,.mp4,.doc,.docx,.ppt,.pptx">
+                <button type="button" class="btn btn-outline-danger btn-remove-file-input"><i class="bi bi-dash"></i></button>
+            `;
+            container.appendChild(newInput);
+        }
+
+        // Hapus input file
+        if (e.target.closest(".btn-remove-file-input")) {
+            e.target.closest(".file-input-group").remove();
+        }
     });
-  });
 </script>
 @endpush

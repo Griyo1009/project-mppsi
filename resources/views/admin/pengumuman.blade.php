@@ -92,14 +92,14 @@
     </div>
 
     <!-- ===== LIST PENGUMUMAN ===== -->
-    <div class="mt-5 mx-4">
+    <div class="container mt-5 mx-6">
         <h6 class="fw-bold mb-3 text-muted text-uppercase">Baru Ditambahkan</h6>
 
         <div id="listPengumuman">
             @foreach($pengumuman as $item)
             <div class="card mb-3 shadow-sm pengumuman-item" data-id="{{ $item->id_pengumuman }}">
                 <div class="card-body d-flex flex-column flex-md-row justify-content-between align-items-start gap-3">
-                    <div class="d-flex flex-column flex-md-row align-items-start gap-3 w-100">
+                    <div class="d-flex flex-column flex-md-row align-items-start gap-3 w-100 ">
                         <img src="{{ asset('storage/' . ($item->gambar ?? 'default.jpg')) }}" alt="Gambar Pengumuman"
                             class="rounded" style="width:200px; height:150px; object-fit:cover;">
                         <div class="flex-grow-1">
@@ -122,7 +122,7 @@
                 aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
-                        <div class="modal-header bg-primary text-white">
+                        <div class="modal-header text-white" style="background: linear-gradient(to bottom, #162660, #2D4EC6);">
                             <h5 class="modal-title" id="editModalLabel">Edit Pengumuman</h5>
                             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                                 aria-label="Close"></button>

@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const formData = new FormData(e.target);
         const token = document.querySelector('input[name="_token"]').value;
 
-        try {
+        try {       
             const res = await fetch(`/admin/pengumuman/${id}`, {
                 method: "POST", 
                 headers: { "X-CSRF-TOKEN": token },

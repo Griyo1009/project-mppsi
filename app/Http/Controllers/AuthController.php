@@ -70,7 +70,7 @@ class AuthController extends Controller
         return view('auth.register');
     }
 
-    public function doRegister(Request $request): Response
+    public function doRegister(Request $request)
     {
         // ✅ Validasi input
         $validatedData = $request->validate([
@@ -99,12 +99,13 @@ class AuthController extends Controller
                 ]);
 
                 if ($user) {
-                    return response("Berhasil register!", 200);
+                    return redirect()
+                        ->route('login')->with('swal_success', 'Registrasi berhasil! Silakan login untuk melanjutkan.');
                 } else {
-                    return response("Gagal menyimpan data user", 500);
+                     return back()->with('swal_error', 'Gagal menyimpan data user.');
                 }
             } catch (\Exception $e) {
-                return response(" Terjadi kesalahan: " . $e->getMessage(), 500);
+                return back()->with('swal_error', 'Terjadi kesalahan: ' . $e->getMessage());
             }
         }
 
