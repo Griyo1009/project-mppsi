@@ -300,7 +300,8 @@
                     <li class="nav-item dropdown ms-3 ps-3 border-start border-white">
                         <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown"
                             role="button" data-bs-toggle="dropdown">
-                            <i class="bi bi-person-circle me-1"></i> Username <i class="bi bi-caret-down-fill ps-2"></i>
+                            <i class="bi bi-person-circle me-1"></i> {{ Auth::user()->username ?? 'User' }} <i
+                                class="bi bi-caret-down-fill ps-2"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="userDropdown">
                             <li><a class="dropdown-item" href="/admin/profil">Profil</a></li>
