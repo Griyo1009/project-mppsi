@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PengumumanController;
 use App\Http\Controllers\WargaController;
 use App\Http\Controllers\MateriController;
+use App\Models\User;  // <-- ini wajib
 
 // ===== Halaman Awal =====
 Route::get('/', function () {
@@ -60,6 +61,11 @@ Route::prefix('admin/materi')->middleware(['auth'])->group(function () {
     Route::delete('/file/{id}', [MateriController::class, 'destroyFile'])->name('materi.file.delete');
 });
 
+// ===== STATUS AKUN DI ADMIN =====
+Route::put('/admin/warga/blokir/{id_user}', [AdminController::class, 'blokir'])->name('admin.blokir');
+Route::put('/admin/warga/terima/{id_user}', [AdminController::class, 'terima'])->name('admin.terima');
+Route::put('/admin/warga/buka/{id_user}', [AdminController::class, 'buka'])->name('admin.buka');
+
 // ===== WARGA SECTION =====
 Route::prefix('warga')->controller(WargaController::class)->group(function () {
     Route::get('/homepage', 'homepage')->name('warga.homepage');
@@ -69,3 +75,4 @@ Route::prefix('warga')->controller(WargaController::class)->group(function () {
     Route::get('/profil-warga', 'profil_warga')->name('warga.profil-warga');
     Route::get('/edit-profil-warga', 'edit_profil_warga')->name('warga.edit-profil-warga');
 });
+

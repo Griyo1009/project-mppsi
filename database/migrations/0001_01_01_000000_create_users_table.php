@@ -13,7 +13,7 @@ return new class extends Migration {
             $table->string('nama_lengkap', 50);
             $table->string('username', 50);
             $table->string('password', 255); // pakai hash, jadi panjangin
-            $table->enum('status_akun', ['0', '1', '2'])->default('0'); // 0 ilegal, 1 legal, 2 blokir
+            $table->string('status_akun', 1); // 0 ilegal, 1 legal, 2 blokir
             $table->boolean('role')->default(0); // 0 warga, 1 admin/RT
             $table->string('foto_profil', 225)->nullable();
             $table->string('email', 50)->unique();

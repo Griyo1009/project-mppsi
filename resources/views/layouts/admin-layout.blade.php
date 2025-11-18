@@ -117,13 +117,14 @@
             background: #2D4EC6;
             color: #fff;
         }
-        
+
         .btn-light:hover {
             background: linear-gradient(to bottom, #162660, #2D4EC6);
             color: white;
             -webkit-background-clip: unset;
             -webkit-text-fill-color: white;
         }
+
         .btn-gradient-outline {
             border: 1px solid #2D4EC6;
             border-color: #2D4EC6;
@@ -259,7 +260,6 @@
                 transition: all 0.35s ease-in-out;
             }
         }
-
     </style>
     @stack('styles')
 
@@ -308,7 +308,7 @@
                                 <hr class="dropdown-divider">
                             </li>
                             <li>
-                                <form action="#" method="POST" class="m-0">
+                                <form action="{{ url('/') }}" method="GET" class="m-0">
                                     @csrf
                                     <button type="submit" class="dropdown-item text-danger">
                                         <i class="bi bi-box-arrow-right me-2"></i>Log Out
