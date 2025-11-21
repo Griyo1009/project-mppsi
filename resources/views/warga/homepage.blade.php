@@ -51,118 +51,51 @@
     <div class="container mt-4">
 
         {{-- Pengumuman Terbaru, ambil 3 --}}
-        @foreach ($pengumuman as $item)
+        @if ($pengumuman)
 
-        @endforeach
+            <div class="card mb-1 d-flex flex-row ">
+                <div class="px-3 py-3">
+                    <img src="{{ asset('storage/' . $pengumuman->gambar) }}" alt="Pengumuman"
+                        style="width:120px; height:120px; aspect-ratio:1/1; object-fit:cover; border-radius:8px;">
+                </div>
+                <div class="card-body pt-4 mb-2">
+                    <h5 class="card-title  fw-bold">{{ $pengumuman->judul }}</h5>
+                    <p class="card-text mb-0">{{ $pengumuman->isi }}</p>
+                    <p class="card-text mb-0">Dilaksanakan pada : {{ $pengumuman->tgl_pelaksanaan ?? '-' }}</p>
+                    <p class="card-text mb-0">Tempat : {{ $pengumuman->lokasi ?? '-' }}</p>
+                </div>
+            </div>
+        @else
+            <p class="text-center">Belum ada pengumuman.</p>
+        @endif
 
-        <div class="card mb-1 d-flex flex-row ">
-            <div class="px-3 py-3">
-                <img src="{{ asset('storage/pengumuman/' . $p->gambar) }}" alt="Pengumuman"
-                    style="width:120px; height:120px; aspect-ratio:1/1; object-fit:cover; border-radius:8px;">
-            </div>
-            <div class="card-body pt-4 mb-2">
-                <h5 class="card-title  fw-bold my-3">{{ $item->judul_pengumuman }}</h5>
-                <p class="card-text mb-0">{{ $p->isi }}</p>
-                <p class="card-text mb-0">Dilaksanakan pada : Sabtu, 18.00 WIB</p>
-                <p class="card-text mb-0">Tempat : Rumah Pak Ahmad</p>
-            </div>
-        </div>
+
     </div>
 
     <hr class="mb-0" style="height: 2px; background-color: #000000ff; border: none;">
 
+
     <div class="px-2">
-        <h4 class="text-primary ms-2 mb-2">Materi Terbaru</h4>
+        <h4 class="text-primary my-3 text-center">Materi Terbaru</h4>
 
-        <div class="d-flex flex-nowrap overflow-auto gap-3" style="scroll-behavior:smooth;">
+        <div class="container">
+            <div class="row justify-content-center g-3">
 
-            <div class="card materi-card py-2 px-2" style="width:175px; flex: 0 0 auto;">
-                <img src="{{ asset('images/warga.png') }}"
-                    style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:8px;" alt="Materi">
-                <div class="card-body text-center">
-                    <h6 class="card-title">Materi</h6>
-                    <a href="#" class="btn btn-primary btn-sm" style="width: 125px;">Buka</a>
-                </div>
-            </div>
-            <div class="card materi-card py-2 px-2" style="width:175px; flex: 0 0 auto;">
-                <img src="{{ asset('images/warga.png') }}"
-                    style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:8px;" alt="Materi">
-                <div class="card-body text-center">
-                    <h6 class="card-title">Materi</h6>
-                    <a href="#" class="btn btn-primary btn-sm" style="width: 125px;">Buka</a>
-                </div>
-            </div>
-            <div class="card materi-card py-2 px-2" style="width:175px; flex: 0 0 auto;">
-                <img src="{{ asset('images/warga.png') }}"
-                    style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:8px;" alt="Materi">
-                <div class="card-body text-center">
-                    <h6 class="card-title">Materi</h6>
-                    <a href="#" class="btn btn-primary btn-sm" style="width: 125px;">Buka</a>
-                </div>
-            </div>
-            <div class="card materi-card py-2 px-2" style="width:175px; flex: 0 0 auto;">
-                <img src="{{ asset('images/warga.png') }}"
-                    style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:8px;" alt="Materi">
-                <div class="card-body text-center">
-                    <h6 class="card-title">Materi</h6>
-                    <a href="#" class="btn btn-primary btn-sm" style="width: 125px;">Buka</a>
-                </div>
-            </div>
-            <div class="card materi-card py-2 px-2" style="width:175px; flex: 0 0 auto;">
-                <img src="{{ asset('images/warga.png') }}"
-                    style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:8px;" alt="Materi">
-                <div class="card-body text-center">
-                    <h6 class="card-title">Materi</h6>
-                    <a href="#" class="btn btn-primary btn-sm" style="width: 125px;">Buka</a>
-                </div>
-            </div>
-            <div class="card materi-card py-2 px-2" style="width:175px; flex: 0 0 auto;">
-                <img src="{{ asset('images/warga.png') }}"
-                    style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:8px;" alt="Materi">
-                <div class="card-body text-center">
-                    <h6 class="card-title">Materi</h6>
-                    <a href="#" class="btn btn-primary btn-sm" style="width: 125px;">Buka</a>
-                </div>
-            </div>
-            <div class="card materi-card py-2 px-2" style="width:175px; flex: 0 0 auto;">
-                <img src="{{ asset('images/warga.png') }}"
-                    style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:8px;" alt="Materi">
-                <div class="card-body text-center">
-                    <h6 class="card-title">Materi</h6>
-                    <a href="#" class="btn btn-primary btn-sm" style="width: 125px;">Buka</a>
-                </div>
-            </div>
-            <div class="card materi-card py-2 px-2" style="width:175px; flex: 0 0 auto;">
-                <img src="{{ asset('images/warga.png') }}"
-                    style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:8px;" alt="Materi">
-                <div class="card-body text-center">
-                    <h6 class="card-title">Materi</h6>
-                    <a href="#" class="btn btn-primary btn-sm" style="width: 125px;">Buka</a>
-                </div>
-            </div>
-            <div class="card materi-card py-2 px-2" style="width:175px; flex: 0 0 auto;">
-                <img src="{{ asset('images/warga.png') }}"
-                    style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:8px;" alt="Materi">
-                <div class="card-body text-center">
-                    <h6 class="card-title">Materi</h6>
-                    <a href="#" class="btn btn-primary btn-sm" style="width: 125px;">Buka</a>
-                </div>
-            </div>
-            <div class="card materi-card py-2 px-2" style="width:175px; flex: 0 0 auto;">
-                <img src="{{ asset('images/warga.png') }}"
-                    style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:8px;" alt="Materi">
-                <div class="card-body text-center">
-                    <h6 class="card-title">Materi</h6>
-                    <a href="#" class="btn btn-primary btn-sm" style="width: 125px;">Buka</a>
-                </div>
-            </div>
-            <div class="card materi-card py-2 px-2" style="width:175px; flex: 0 0 auto;">
-                <img src="{{ asset('images/warga.png') }}"
-                    style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:8px;" alt="Materi">
-                <div class="card-body text-center">
-                    <h6 class="card-title">Materi</h6>
-                    <a href="#" class="btn btn-primary btn-sm" style="width: 125px;">Buka</a>
-                </div>
+                @foreach ($materi as $m)
+                    <div class="col-6 col-md-4 col-lg-2 d-flex justify-content-center">
+                        <div class="card materi-card py-2 px-2" style="width:175px;">
+
+                            <img src="{{ asset('images/warga.png') }}"
+                                style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:8px;" alt="Materi">
+                            <div class="card-body text-center">
+                                <h6 class="card-title">{{ Str::limit($m->judul, 20) }}</h6>
+                                <a href="#" class="btn btn-primary btn-sm" style="width: 125px;">Buka</a>
+                                ini belum di lingin ya. gasingkron karena beda field. butuh revisi
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+
             </div>
         </div>
     </div>

@@ -4,20 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pengumuman;
+use App\Models\Materi;
 
 class WargaController extends Controller
 {
     public function homepage()
     {
-        return view('warga.homepage');
+        $pengumuman = Pengumuman::latest()->first();
+        $materi = Materi::latest()->take(6)->get();
+        return view('warga.homepage', compact('pengumuman', 'materi'));
     }
     public function pengumuman()
     {
-        $pengumuman = Pengumuman::orderBy('created_at')
-            ->take(3)
-            ->get();
 
-        return view('warga.pengumuman', compact());
+
+        return view('warga.pengumuman');
     }
     public function materi()
     {
