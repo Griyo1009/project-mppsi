@@ -12,9 +12,12 @@ return new class extends Migration {
             $table->string('judul', 225);
             $table->string('gambar', 225)->nullable();
             $table->text('isi');
-            $table->date('tgl_pengumuman')->default(now());
+            $table->date('tgl_pengumuman')->default(DB::raw('CURRENT_DATE'));
             $table->foreignId('id_user')->constrained('users', 'id_user')->onDelete('cascade');
+            $table->date('tgl_pelaksanaan');
+            $table->string('lokasi', 225);
             $table->timestamps();
+
         });
     }
 

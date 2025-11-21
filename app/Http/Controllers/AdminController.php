@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Materi;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Pengumuman;
+
 
 
 class AdminController extends Controller
@@ -11,18 +14,24 @@ class AdminController extends Controller
     public function index()
     {
         // Data dummy sementara, nanti bisa diganti pakai model
-        $data = [
-            'warga_aktif' => 10,
-            'materi_upload' => 10,
-            'komentar_count' => 8,
-        ];
+        $warga_aktif = User::where('role', 0)
+            ->where('status_akun', '!=', 2)
+            ->count();
+        $materi_upload = Materi::count();
+        // $komentar_count = Komentar::count();
 
-        return view('admin.homepage', compact('data'));
+        return view('admin.homepage', compact(
+            'warga_aktif',
+            'materi_upload',
+            // 'komentar_count'
+        ));
     }
     public function pengumuman()
     {
-        return view('admin.pengumuman');
+        $pengumuman = Pengumuman::latest()->get();
+        return view('admin.pengumuman', compact('pengumuman'));
     }
+
     public function materi()
     {
         return view('admin.materi');
@@ -64,7 +73,7 @@ class AdminController extends Controller
     public function buka($id)
     {
         $user = User::findOrFail($id); // pakai primaryKey id_user
-        $user->status_akun = 1;        // 2 = diblokir
+        $user->status_akun = 1;        //  = legal
         $user->save();
 
         return redirect()->back()->with('success', 'Akun berhasil dibuka!');

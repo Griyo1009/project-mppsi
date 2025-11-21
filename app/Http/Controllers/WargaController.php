@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Pengumuman;
 
 class WargaController extends Controller
 {
@@ -12,7 +13,11 @@ class WargaController extends Controller
     }
     public function pengumuman()
     {
-        return view('warga.pengumuman');
+        $pengumuman = Pengumuman::orderBy('created_at')
+            ->take(3)
+            ->get();
+
+        return view('warga.pengumuman', compact());
     }
     public function materi()
     {

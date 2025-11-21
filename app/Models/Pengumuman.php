@@ -2,10 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-namespace App\Models;
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -22,7 +18,9 @@ class Pengumuman extends Model
         'isi',
         'gambar',
         'tgl_pengumuman',
-        'id_user'
+        'id_user',
+        'tgl_pelaksanaan',
+        'lokasi',
     ];
 
     public function user()

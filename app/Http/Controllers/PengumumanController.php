@@ -35,12 +35,14 @@ class PengumumanController extends Controller
         return response()->json($data);
     }
 
-     public function store(Request $request)
+    public function store(Request $request)
     {
         // validasi
         $validated = $request->validate([
             'judul' => 'required|string|max:255',
             'isi' => 'required|string',
+            'tgl_pelaksanaan' => 'required|string',
+            'lokasi' => 'required|string',
             'tgl_pengumuman' => 'required|date',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:5120',
         ]);
@@ -95,6 +97,8 @@ class PengumumanController extends Controller
             'judul' => $validated['judul'],
             'isi' => $validated['isi'],
             'tgl_pengumuman' => $validated['tgl_pengumuman'],
+            'tgl_pelaksanaan' => $validated['tgl_pelaksanaan'],
+            'lokasi' => $validated['lokasi'],
             'gambar' => $gambarPath,
         ];
 
@@ -107,7 +111,7 @@ class PengumumanController extends Controller
                 'data' => $pengumuman,
             ]);
         } catch (\Exception $e) {
-            Log::error('Pengumuman store error: '.$e->getMessage(), [
+            Log::error('Pengumuman store error: ' . $e->getMessage(), [
                 'data' => $data,
             ]);
             return response()->json([
@@ -120,75 +124,80 @@ class PengumumanController extends Controller
 
 
     public function update(Request $request, $id)
-{
-    $pengumuman = Pengumuman::findOrFail($id);
+    {
+        $pengumuman = Pengumuman::findOrFail($id);
 
-    // Validasi ringan
-    $validated = $request->validate([
-        'judul' => 'required|string|max:255',
-        'isi' => 'required|string',
-        'gambar' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:5120',
-    ]);
 
-    // Simpan gambar baru kalau ada
-    if ($request->hasFile('gambar')) {
-        // hapus gambar lama
-        if ($pengumuman->gambar) {
-            \Storage::disk('public')->delete($pengumuman->gambar);
+        // Validasi ringan
+        $validated = $request->validate([
+            'judul' => 'required|string|max:255',
+            'isi' => 'required|string',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:5120',
+            'tgl_pelaksanaan' => 'required|date',
+            'lokasi' => 'required|string',
+        ]);
+
+        // Simpan gambar baru kalau ada
+        if ($request->hasFile('gambar')) {
+            // hapus gambar lama
+            if ($pengumuman->gambar) {
+                \Storage::disk('public')->delete($pengumuman->gambar);
+            }
+
+            $path = $request->file('gambar')->store('pengumuman', 'public');
+            $validated['gambar'] = $path;
         }
 
-        $path = $request->file('gambar')->store('pengumuman', 'public');
-        $validated['gambar'] = $path;
-    }
-
-    // Update data ke DB
-    $pengumuman->update($validated);
-
-    return response()->json([
-        'success' => true,
-        'message' => 'Pengumuman berhasil diperbarui.',
-        'data' => $pengumuman
-    ]);
-}
+        // Update data ke DB
+        $pengumuman->update($validated);
 
 
-   public function destroy($id)
-{
-    try {
-        $pengumuman = Pengumuman::find($id);
-
-        if (!$pengumuman) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Pengumuman tidak ditemukan atau sudah dihapus sebelumnya.',
-            ], 404);
-        }
-
-        // Hapus gambar jika ada
-        if ($pengumuman->gambar && Storage::disk('public')->exists($pengumuman->gambar)) {
-            Storage::disk('public')->delete($pengumuman->gambar);
-        }
-
-        $judul = $pengumuman->judul; // buat dikirim di response
-        $pengumuman->delete();
 
         return response()->json([
             'success' => true,
-            'message' => "Pengumuman '{$judul}' berhasil dihapus.",
-            'deleted_id' => $id,
+            'message' => 'Pengumuman berhasil diperbarui.',
+            'data' => $pengumuman
         ]);
-    } catch (\Exception $e) {
-        \Log::error('Gagal menghapus pengumuman: ' . $e->getMessage(), [
-            'pengumuman_id' => $id,
-        ]);
-
-        return response()->json([
-            'success' => false,
-            'message' => 'Terjadi kesalahan saat menghapus pengumuman.',
-            'error' => $e->getMessage(),
-        ], 500);
     }
-}
+
+
+    public function destroy($id)
+    {
+        try {
+            $pengumuman = Pengumuman::find($id);
+
+            if (!$pengumuman) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Pengumuman tidak ditemukan atau sudah dihapus sebelumnya.',
+                ], 404);
+            }
+
+            // Hapus gambar jika ada
+            if ($pengumuman->gambar && Storage::disk('public')->exists($pengumuman->gambar)) {
+                Storage::disk('public')->delete($pengumuman->gambar);
+            }
+
+            $judul = $pengumuman->judul; // buat dikirim di response
+            $pengumuman->delete();
+
+            return response()->json([
+                'success' => true,
+                'message' => "Pengumuman '{$judul}' berhasil dihapus.",
+                'deleted_id' => $id,
+            ]);
+        } catch (\Exception $e) {
+            \Log::error('Gagal menghapus pengumuman: ' . $e->getMessage(), [
+                'pengumuman_id' => $id,
+            ]);
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Terjadi kesalahan saat menghapus pengumuman.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
 
 
 }

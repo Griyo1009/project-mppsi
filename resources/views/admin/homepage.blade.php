@@ -3,20 +3,19 @@
 @section('title', 'Dashboard Admin RT 07')
 
 @push('styles')
-<style>
-  /* HEADER */
-  .header-bg {
-    background: url('{{ asset('images/login-bg.png') }}') center/cover no-repeat;
-    height: 230px;
-    position: relative
-  }
-  
-  .btn-outline-dark:hover {
-    background-color: white;
-    color: rgb(123, 123, 123);
-  }
+  <style>
+    /* HEADER */
+    .header-bg {
+      background: url('{{ asset('images/login-bg.png') }}') center/cover no-repeat;
+      height: 230px;
+      position: relative
+    }
 
-</style>
+    .btn-outline-dark:hover {
+      background-color: white;
+      color: rgb(123, 123, 123);
+    }
+  </style>
 @endpush
 
 @section('content')
@@ -31,8 +30,7 @@
   <!-- DATA STATISTIK -->
   <div class="bg-white shadow mt-n5 overflow-hidden position-relative w-100" style="border-radius: 0;">
     <!-- Judul Section -->
-    <div class="text-white fw-bold px-4 py-2"
-         style="background: linear-gradient(to bottom, #162660, #2D4EC6);">
+    <div class="text-white fw-bold px-4 py-2" style="background: linear-gradient(to bottom, #162660, #2D4EC6);">
       DATA STATISTIK
     </div>
 
@@ -43,9 +41,11 @@
         <div class="text-start">
           <small class="text-muted">Warga Aktif</small>
         </div>
-        <div class="text-center">
-          <h3 class="fw-bold mb-0">10 Warga <i class="bi bi-people-fill"></i></h3>
+        <div class="text-center d-flex justify-content-center align-items-center gap-2">
+          <h3 class="fw-bold mb-0">{{ $warga_aktif }} Warga</h3>
+          <i class="bi bi-people-fill fs-3"></i>
         </div>
+
       </div>
 
       <!-- Materi -->
@@ -53,8 +53,9 @@
         <div class="text-start">
           <small class="text-muted">Materi Yang Sudah Diupload</small>
         </div>
-        <div class="text-center">
-          <h3 class="fw-bold mb-0">10 Materi <i class="bi bi-journal-bookmark-fill"></i></h3>
+        <div class="text-center d-flex justify-content-center align-items-center gap-2">
+          <h3 class="fw-bold mb-0">{{ $materi_upload }} Materi</h3>
+          <i class="bi bi-journal-bookmark-fill fs-3"></i>
         </div>
       </div>
     </div>
@@ -63,7 +64,8 @@
     <!-- Komentar Section -->
     <div class="px-4 pb-4">
       <p class="mb-2 text-muted text-start">Komentar (8)</p>
-      <a href="#" class="btn btn-outline-dark text-start fst-italic w-100">Lihat Komentar Terbaru <i class="bi bi-chevron-right"></i></a>
+      <a href="#" class="btn btn-outline-dark text-start fst-italic w-100">Lihat Komentar Terbaru <i
+          class="bi bi-chevron-right"></i></a>
     </div>
   </div>
 
@@ -76,7 +78,7 @@
           <img src="{{ asset('images/pengumuman.png') }}" class="card-img-top" alt="Pengumuman">
           <div class="card-body">
             <h6 class="fw-semibold">Pengumuman</h6>
-            <a href="#" class="btn btn-gradient-outline mt-2 px-4"><span>Tambah</span></a>
+            <a href="pengumuman" class="btn btn-gradient-outline mt-2 px-4"><span>Tambah</span></a>
           </div>
         </div>
       </div>
@@ -86,7 +88,7 @@
           <img src="{{ asset('images/materi.png') }}" class="card-img-top" alt="Materi">
           <div class="card-body">
             <h6 class="fw-semibold">Materi</h6>
-            <a href="#" class="btn btn-gradient-outline mt-2 px-4"><span>Tambah</span></a>
+            <a href="materi" class="btn btn-gradient-outline mt-2 px-4"><span>Tambah</span></a>
           </div>
         </div>
       </div>
@@ -96,7 +98,7 @@
           <img src="{{ asset('images/warga.png') }}" class="card-img-top" alt="Warga">
           <div class="card-body">
             <h6 class="fw-semibold">Warga</h6>
-            <a href="#" class="btn btn-gradient-outline mt-2 px-4"><span>Kelola</span></a>
+            <a href="warga" class="btn btn-gradient-outline mt-2 px-4"><span>Kelola</span></a>
           </div>
         </div>
       </div>

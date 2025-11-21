@@ -3,7 +3,7 @@
 @section('page-title', 'HomePage Warga')
 
 @push('styles')
-<style>
+    <style>
         .background-atas {
             position: relative;
             background: url('{{ asset("images/login-bg.png") }}') center/cover no-repeat;
@@ -35,31 +35,34 @@
         .card:hover {
             transform: translateY(-4px);
         }
-</style>
+    </style>
 @endpush
 
 @section('content')
-<div class="background-atas">
-    <div class="tulisan-overlay ">
-        Selamat Datang! Warga RT 07
+    <div class="background-atas">
+        <div class="tulisan-overlay ">
+            Selamat Datang! Warga RT 07
+        </div>
     </div>
-</div>
 
-<div style="background:linear-gradient(#162660,#2D4EC6)">
-    <h4 class="text-white py-3 fw-bold ms-5" style="margin-left:8rem;">Pengumuman Terbaru</h4>
-</div>
+    <div style="background:linear-gradient(#162660,#2D4EC6)">
+        <h4 class="text-white py-3 fw-bold ms-5" style="margin-left:8rem;">Pengumuman Terbaru</h4>
+    </div>
     <div class="container mt-4">
 
         {{-- Pengumuman Terbaru, ambil 3 --}}
+        @foreach ($pengumuman as $item)
+
+        @endforeach
 
         <div class="card mb-1 d-flex flex-row ">
             <div class="px-3 py-3">
-                <img src="{{ asset('images/warga.png') }}" alt="Pengumuman"
+                <img src="{{ asset('storage/pengumuman/' . $p->gambar) }}" alt="Pengumuman"
                     style="width:120px; height:120px; aspect-ratio:1/1; object-fit:cover; border-radius:8px;">
             </div>
             <div class="card-body pt-4 mb-2">
-                <h5 class="card-title  fw-bold my-3">Ngaji di Rumah Pak Ahmad
-                </h5>
+                <h5 class="card-title  fw-bold my-3">{{ $item->judul_pengumuman }}</h5>
+                <p class="card-text mb-0">{{ $p->isi }}</p>
                 <p class="card-text mb-0">Dilaksanakan pada : Sabtu, 18.00 WIB</p>
                 <p class="card-text mb-0">Tempat : Rumah Pak Ahmad</p>
             </div>

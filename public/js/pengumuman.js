@@ -98,6 +98,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     document.getElementById("edit_id").value = data.id_pengumuman;
                     document.getElementById("edit_judul").value = data.judul;
                     document.getElementById("edit_isi").value = data.isi;
+                    document.getElementById("edit_tgl_pelaksanaan").value = data.tgl_pelaksanaan;
+                    document.getElementById("edit_lokasi").value = data.lokasi;
+
+
 
                     const preview = document.getElementById("previewEditImage");
                     if (data.gambar) {
