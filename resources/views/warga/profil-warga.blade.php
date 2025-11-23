@@ -4,73 +4,82 @@
 
 @section('content')
 
-    <style>
+    @php
+        $user = Auth::user(); // Ambil user yang sedang login
+      @endphp
+    <div class="mx-auto pt-5 pb-3" style="background: linear-gradient(to bottom, #162660, #2D4EC6);">
 
-    </style>
-
-    <div class="d-flex justify-content-center align-items-center py-2 "
-        style="background: linear-gradient(to bottom, #162660, #2D4EC6);">
-
-        <div class="text-center">
-            <div class="mb-2">
-                <img src="{{ asset('images/warga.png') }}" alt="Foto Profil" class="rounded-circle shadow-sm"
-                    style="width: 175px; height: 175px; object-fit: cover;">
+        <!-- FOTO PROFIL -->
+        <div class="text-center mb-2">
+            <img src="{{ asset('storage/profiles/' . $user->foto_profil) }}" alt="Profile Photo" class="rounded-circle mb-3"
+                style="width: 200px; height: 200px; object-fit: cover;">
+            <div>
+                <button class="btn btn-light btn-sm">Unggah Foto</button>
             </div>
+        </div>
 
-            <!-- Tombol ganti foto -->
-            <div class="pt-2">
+    </div>
 
-                <a href="{{ route('warga.edit-profil-warga') }}" class="btn btn-sm fw-semibold text-primary"
-                    style="background-color: white; border: 2px solid white; border-radius:8px;">
-                    Ganti Foto
-                </a>
+    <!-- BIODATA DIRI -->
+    <div class="card-header gradient-text fw-semibold ps-5 py-2 mx-0 bg-white ">
+        BIODATA DIRI
+    </div>
 
-            </div>
+    <div class="mx-auto p-5" style="background: linear-gradient(to bottom, #162660, #2D4EC6);">
+        <div class="card border-0 shadow my-3">
+            <form action="{{ route('warga.update-profil') }}" method="POST" enctype="multipart/form-data"
+                class="p-3 border rounded bg-light">
+
+                @csrf
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Nama Lengkap</label>
+                    <input type="text" class="form-control" id="nama" name="nama" value="{{ $user->nama_lengkap }}"
+                        readonly>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">NIK</label>
+                    <input type="text" class="form-control" id="nik" name="nik" value="{{ $user->NIK }}" readonly>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Email</label>
+                    <input type="text" class="form-control" id="email" name="email" value="{{ $user->email }}" readonly>
+                </div>
+
+                <div class="text-center mt-4" id="btn-group">
+                    <button type="button" class="btn btn-secondary px-4 text-white" id="btnEdit">Edit</button>
+
+                    <div id="editActions" style="display: none;">
+                        <button type="button" class="btn btn-secondary px-4 me-2" id="btnCancel">Batal</button>
+                        <button type="submit" class="btn btn-gradient-outline px-4"><span>Simpan</span></button>
+
+                    </div>
+                </div>
+
+            </form>
         </div>
     </div>
 
-    <h4 class=" pt-2 text-primary" style="margin-left:3rem;">Biodata Diri</h4>
-    <div class="py-3" style="background: linear-gradient(to bottom, #162660, #2D4EC6);">
+    <!-- Script interaksi -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const editBtn = document.getElementById("btnEdit");
+            const cancelBtn = document.getElementById("btnCancel");
+            const editActions = document.getElementById("editActions");
+            const inputs = document.querySelectorAll("#nama, #nik, #email");
 
-        <div style="background-color: #D1D4DB; border-radius: 5px;" class="mx-4 px-3">
-            <p class="mb-1 pt-4 ms-4">Nama Lengkap</p>
-            <!-- ulang sesuai jumlah pengumuman -->
-            <div class="card py-3 px-4" style="border : 1px solid #000;">
-                <div class=" d-flex justify-content-between align-items-center">
-                    Nama Lengkap
-                </div>
-            </div>
-            <p class="mb-1 pt-4 ms-4">NIK</p>
-            <!-- ulang sesuai jumlah pengumuman -->
-            <div class="card py-3 px-4" style="border : 1px solid #000;">
-                <div class=" d-flex justify-content-between align-items-center">
-                    NIK
-                </div>
-            </div>
-            <p class="mb-1 pt-4 ms-4">No. Handphone</p>
-            <!-- ulang sesuai jumlah pengumuman -->
-            <div class="card py-3 px-4" style="border : 1px solid #000;">
-                <div class=" d-flex justify-content-between align-items-center">
-                    No. Handphone
-                </div>
-            </div>
+            editBtn.addEventListener("click", () => {
+                inputs.forEach(el => el.readOnly = false);
+                editBtn.classList.add("d-none");
+                editActions.classList.remove("d-none");
+            });
 
-            <!-- ulang sesuai jumlah pengumuman -->
-            <div class=" py-4 ms-5 d-flex justify-content-center align-items-center">
-                <a href="{{ route('warga.edit-profil-warga') }}" class="btn btn-sm text-white"
-                    style="background: linear-gradient(to bottom, #162660, #2D4EC6); border-radius:8px; width: 300px; text-decoration: none;">
-                    Edit
-                </a>
-            </div>
-        </div>
-    </div>
-
-
-
-
-
-
-
-
-
+            cancelBtn.addEventListener("click", () => {
+                inputs.forEach(el => el.readOnly = true);
+                editActions.classList.add("d-none");
+                editBtn.classList.remove("d-none");
+            });
+        });
+    </script>
 @endsection

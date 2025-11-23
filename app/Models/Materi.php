@@ -16,8 +16,8 @@ class Materi extends Model
     protected $table = 'materis';
     protected $fillable = [
         'id_user',
-        'judul_materi', 
-        'deskripsi', 
+        'judul_materi',
+        'deskripsi',
         'tgl_up'
     ];
 
@@ -30,7 +30,7 @@ class Materi extends Model
     {
         return $this->hasMany(Komentar::class, 'id_materi');
     }
-    
+
     public function files()
     {
         return $this->hasMany(MateriFile::class, 'id_materi');

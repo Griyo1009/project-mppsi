@@ -53,18 +53,16 @@
         {{-- Pengumuman Terbaru, ambil 3 --}}
         @if ($pengumuman)
 
-            <div class="card mb-1 d-flex flex-row ">
+            <div class="card mb-1 d-flex flex-row align-items-center">
                 <div class="px-3 py-3">
                     <img src="{{ asset('storage/' . $pengumuman->gambar) }}" alt="Pengumuman"
-                        style="width:120px; height:120px; aspect-ratio:1/1; object-fit:cover; border-radius:8px;">
+                        style="width:120px; height:120px; aspect-ratio:1/1; object-fit:contain; border-radius:8px;">
                 </div>
-                <div class="card-body pt-4 mb-2">
-                    <h5 class="card-title  fw-bold">{{ $pengumuman->judul }}</h5>
-                    <p class="card-text mb-0">{{ $pengumuman->isi }}</p>
-                    <p class="card-text mb-0">Dilaksanakan pada : {{ $pengumuman->tgl_pelaksanaan ?? '-' }}</p>
-                    <p class="card-text mb-0">Tempat : {{ $pengumuman->lokasi ?? '-' }}</p>
+                <div class="flex-grow-1 d-flex justify-content-center">
+                    <h5 class="card-title fw-bold mb-0 text-center">{{ $pengumuman->judul }}</h5>
                 </div>
             </div>
+
         @else
             <p class="text-center">Belum ada pengumuman.</p>
         @endif
@@ -80,23 +78,15 @@
 
         <div class="container">
             <div class="row justify-content-center g-3">
-
                 @foreach ($materi as $m)
                     <div class="col-6 col-md-4 col-lg-2 d-flex justify-content-center">
-                        <div class="card materi-card py-2 px-2" style="width:175px;">
-
-                            <img src="{{ asset('images/warga.png') }}"
-                                style="width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:8px;" alt="Materi">
-                            <div class="card-body text-center">
-                                <h6 class="card-title">{{ Str::limit($m->judul, 20) }}</h6>
-                                <a href="#" class="btn btn-primary btn-sm" style="width: 125px;">Buka</a>
-                                ini belum di lingin ya. gasingkron karena beda field. butuh revisi
-                            </div>
+                        <div class="card materi-card py-2 px-2 " style="width:175px;">
+                            <h6 class="card-title text-center">{{ Str::limit($m->judul_materi, 20) }}</h6>
+                            <a href="{{ route('warga.lihat-materi', $m->id_materi) }}" class="btn btn-primary btn-sm"
+                                style="width: 125px;">Buka</a>
                         </div>
                     </div>
                 @endforeach
-
             </div>
         </div>
-    </div>
 @endsection
