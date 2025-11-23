@@ -72,16 +72,16 @@
         <div class="text-center py-5">Belum ada komentar</div>
     @else
         @foreach ($materi->komentar as $k)
-            <div class="px-4">
-                <div class="pt-4 ms-4">
+            <div class="pt-1">
+                <div class="pt-1 ms-4">
                     Komentar dari {{ $k->user->username ?? 'Warga' }}
                     <span class="text-muted" style="font-size: 12px;">
                         ({{ \Carbon\Carbon::parse($k->tgl_komen)->format('d/m/Y') }})
                     </span>
                 </div>
 
-                <div class="card mb-4 ms-2">
-                    <p class="ms-3 mt-2">{{ $k->isi_komen }}</p>
+                <div class="card mb-1 ms-2">
+                    <p class="ms-3  mt-3">{{ $k->isi_komen }}</p>
                 </div>
             </div>
         @endforeach

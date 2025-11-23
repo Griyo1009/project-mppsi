@@ -74,6 +74,7 @@ Route::prefix('warga')->controller(WargaController::class)->group(function () {
     Route::get('/lihat-materi/{id_materi}', 'lihat_materi')->name('warga.lihat-materi');
     Route::get('/profil-warga', 'profil_warga')->name('warga.profil-warga');
     Route::get('/edit-profil-warga', 'edit_profil_warga')->name('warga.edit-profil-warga');
+
     Route::post('/warga/komentar/{id_materi}', [WargaController::class, 'kirimKomentar'])
         ->name('warga.komentar.kirim');
 
