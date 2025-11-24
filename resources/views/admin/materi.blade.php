@@ -39,7 +39,7 @@
 @section('content')
 <div class="bg-white shadow mt-n5 overflow-hidden position-relative w-100">
     <div class="p-3">
-        <div class="fw-bold fs-6 ms-2" style="color: #162660;">MATERI</div>
+        <div class="fw-bold fs-6 ms-2" style="color: #162660;">MANAGE MATERI</div>
     </div>
 
     <div class="pb-1 pt-4 " style="background: linear-gradient(to bottom, #162660, #2D4EC6);">

@@ -38,6 +38,12 @@ Route::prefix('admin')->controller(AdminController::class)->group(function () {
     Route::get('/materi', 'materi')->name('admin.materi');
     Route::get('/warga', 'warga')->name('admin.warga');
     Route::get('/profil', 'profil')->name('admin.profil');
+    // Route::get('/materi-lihat/{id_materi}', 'materi_lihat')->name('materi-lihat');
+
+    Route::get('/daftar-materi', 'daftarMateri')->name('admin.daftar-materi');
+    Route::get('/lihat-materi/{id_materi}', 'lihatMateri')->name('admin.lihat-materi');
+    Route::post('/lihat-materi/{id_materi}/komentar', 'kirimKomentar')->name('admin.komentar.kirim');
+
 });
 
 // ===== PENGUMUMAN ADMIN =====
@@ -60,6 +66,9 @@ Route::prefix('admin/materi')->middleware(['auth'])->group(function () {
     Route::delete('/delete/{id}', [MateriController::class, 'destroy'])->name('materi.delete');
     Route::delete('/file/{id}', [MateriController::class, 'destroyFile'])->name('materi.file.delete');
 });
+
+
+
 
 // ===== STATUS AKUN DI ADMIN =====
 Route::put('/admin/warga/blokir/{id_user}', [AdminController::class, 'blokir'])->name('admin.blokir');
