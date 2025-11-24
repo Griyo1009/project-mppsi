@@ -70,8 +70,10 @@
                 <div id="fileContainer" class="mb-3">
                     <label class="form-label fw-semibold">Unggah File Materi</label>
                     <div class="input-group mb-2 file-input-group">
-                        <input type="file" name="files[]" class="form-control" accept=".pdf,.jpg,.jpeg,.png,.mp4,.doc,.docx,.ppt,.pptx">
-                        <button type="button" class="btn btn-outline-secondary btn-add-file"><i class="bi bi-plus"></i></button>
+                        <input type="file" name="files[]" class="form-control"
+                            accept=".pdf,.jpg,.jpeg,.png,.mp4,.doc,.docx,.ppt,.pptx">
+                        <button type="button" class="btn btn-outline-secondary btn-add-file"><i
+                                class="bi bi-plus"></i></button>
                     </div>
                 </div>
 
@@ -93,11 +95,12 @@
             <div class="modal fade" id="editMateriModal" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-lg modal-dialog-centered">
                     <div class="modal-content border-0 rounded-4 shadow-lg">
-                        <div class="modal-header text-white" style="background: linear-gradient(to bottom, #162660, #2D4EC6);">
+                        <div class="modal-header text-white"
+                            style="background: linear-gradient(to bottom, #162660, #2D4EC6);">
                             <h5 class="modal-title">Edit Materi</h5>
                             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-body overflow-auto" style="max-height: 70vh;">
                             <form id="formEditMateri" enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" id="edit_id_materi" name="id_materi">
@@ -115,28 +118,35 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label class="form-label fw-semibold">File Tersimpan</label>
+                                    <label class="form-label fw-semibold">File & Link Tersimpan</label>
                                     <div id="existingFiles" class="border rounded p-2 bg-light small text-muted">
                                         <em>Belum ada file.</em>
                                     </div>
                                 </div>
 
-                                <div class="mb-3">
-                                    <label class="form-label fw-semibold">Tambah File Baru (boleh lebih dari
-                                        satu)</label>
-                                    <input type="file" name="files[]" id="edit_files" multiple class="form-control">
+                                <label class="mt-3">Tambah File Materi</label>
+                                <div id="editFileWrapper">
+                                    <div class="input-group mb-2">
+                                        <input type="file" name="new_files[]" class="form-control">
+                                        <button type="button"
+                                            class="btn btn-outline-secondary btn-add-edit-file">+</button>
+                                    </div>
                                 </div>
 
-                                <div class="mb-3">
-                                    <label class="form-label fw-semibold">Tambah / Ubah Link Materi</label>
-                                    <input type="url" name="link_url" id="edit_link_url" class="form-control"
-                                        placeholder="https://...">
+                                <label class="mt-3">Tambah Link Materi (YouTube/Drive/Web)</label>
+                                <div id="editLinkWrapper">
+                                    <div class="input-group mb-2">
+                                        <input type="text" name="new_links[]" class="form-control" placeholder="Masukkan link materi">
+                                        <button type="button" class="btn btn-outline-secondary btn-add-edit-link">+</button>
+                                    </div>
                                 </div>
+                                <input type="hidden" name="deleted_files" id="deleted_files">
                             </form>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                            <button type="submit" form="formEditMateri" class="btn btn-warning text-white" style="width: 200px;">Simpan
+                            <button type="submit" form="formEditMateri" class="btn btn-warning text-white"
+                                style="width: 200px;">Simpan
                                 Perubahan</button>
                         </div>
                     </div>
@@ -242,7 +252,7 @@
     });
 
     // ===== Tambah input file baru =====
-    document.querySelector("#fileContainer")?.addEventListener("click", (e) => {
+    document.querySelector("#fileContainer") ?.addEventListener("click", (e) => {
         if (e.target.closest(".btn-add-file")) {
             const container = document.getElementById("fileContainer");
             const newInput = document.createElement("div");
@@ -253,11 +263,11 @@
             `;
             container.appendChild(newInput);
         }
-
         // Hapus input file
         if (e.target.closest(".btn-remove-file-input")) {
             e.target.closest(".file-input-group").remove();
         }
     });
+
 </script>
 @endpush

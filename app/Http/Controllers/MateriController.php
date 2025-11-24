@@ -7,6 +7,7 @@ use App\Models\MateriFile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log; // Gunakan Log untuk debugging
 
 class MateriController extends Controller
 {
@@ -44,7 +45,8 @@ class MateriController extends Controller
         $request->validate([
             'judul' => 'required|string|max:225',
             'deskripsi' => 'required|string',
-            'files.*' => 'nullable|file|mimes:pdf,doc,docx,ppt,pptx,jpg,jpeg,png,mp4|max:51200',
+            // Pastikan ini adalah nama input di form create
+            'files.*' => 'nullable|file|mimes:pdf,doc,docx,ppt,pptx,jpg,jpeg,png,mp4|max:51200', 
             'links.*' => 'nullable|url',
         ]);
 
@@ -96,7 +98,7 @@ class MateriController extends Controller
                 'data' => $materi->load('files')
             ]);
         } catch (\Exception $e) {
-            \Log::error('Gagal menyimpan materi: ' . $e->getMessage());
+            Log::error('Gagal menyimpan materi: ' . $e->getMessage());
             return response()->json([
                 'success' => false,
                 'message' => 'Terjadi kesalahan saat menyimpan materi.'
@@ -104,10 +106,10 @@ class MateriController extends Controller
         }
     }
 
-    // ===== UPDATE MATERI =====
+    // ===== UPDATE MATERI (TERKOREKSI) =====
     public function update(Request $request, $id)
     {
-        $materi = Materi::find($id);
+        $materi = Materi::with('files')->find($id);
 
         if (!$materi) {
             return response()->json([
@@ -116,23 +118,46 @@ class MateriController extends Controller
             ], 404);
         }
 
+        // 1. VALIDASI DATA BARU
+        // Menggunakan 'new_files.*' dan 'new_links.*' sesuai nama input dari JS
         $request->validate([
             'judul_materi' => 'required|string|max:225',
             'deskripsi' => 'nullable|string',
-            'files.*' => 'nullable|file|mimes:pdf,doc,docx,ppt,pptx,jpg,jpeg,png,mp4|max:51200',
-            'link_url' => 'nullable|url',
+            'new_files.*' => 'nullable|file|mimes:pdf,doc,docx,ppt,pptx,jpg,jpeg,png,mp4|max:51200',
+            'new_links.*' => 'nullable|url',
         ]);
 
         try {
+            // 2. UPDATE TEXT DASAR (Judul & Deskripsi)
             $materi->update([
                 'judul_materi' => $request->judul_materi,
                 'deskripsi' => $request->deskripsi,
                 'tgl_up' => now()->format('Y-m-d'),
+                // 'id_user' tidak perlu di-update jika tidak berubah
             ]);
 
-            // Simpan file baru
-            if ($request->hasFile('files')) {
-                foreach ($request->file('files') as $file) {
+            // 3. PROSES PENGHAPUSAN FILE LAMA (deleted_files)
+            if ($request->deleted_files) {
+                $deletedIds = json_decode($request->deleted_files, true);
+                
+                if (is_array($deletedIds) && count($deletedIds) > 0) {
+                    $filesToDelete = MateriFile::whereIn('id_file', $deletedIds)->get();
+                    
+                    foreach ($filesToDelete as $file) {
+                        // Hapus file fisik jika bukan link dan memiliki path
+                        if ($file->tipe_file !== 'link' && $file->file_path && Storage::disk('public')->exists($file->file_path)) {
+                            Storage::disk('public')->delete($file->file_path);
+                        }
+                        // Hapus record dari database
+                        $file->delete();
+                    }
+                }
+            }
+            
+            // 4. SIMPAN FILE BARU (new_files)
+            // Menggunakan 'new_files' sesuai nama input di FormData JS
+            if ($request->hasFile('new_files')) { 
+                foreach ($request->file('new_files') as $file) {
                     $path = $file->store('materi', 'public');
                     $ext = strtolower($file->getClientOriginalExtension());
                     $tipe = match ($ext) {
@@ -150,22 +175,30 @@ class MateriController extends Controller
                     ]);
                 }
             }
-
-            // Update atau buat link baru
-            if ($request->link_url) {
-                MateriFile::updateOrCreate(
-                    ['id_materi' => $materi->id_materi, 'tipe_file' => 'link'],
-                    ['link_url' => $request->link_url]
-                );
+            
+            // 5. SIMPAN LINK BARU (new_links)
+            // Menggunakan 'new_links' sesuai nama input di FormData JS
+            if ($request->new_links && is_array($request->new_links)) {
+                foreach ($request->new_links as $link) {
+                    // PENTING: Cek agar input kosong di UI (yang Anda minta) tidak tersimpan
+                    if (!empty($link)) { 
+                        MateriFile::create([
+                            'id_materi' => $materi->id_materi,
+                            'link_url' => $link,
+                            'tipe_file' => 'link',
+                        ]);
+                    }
+                }
             }
 
+            // 6. RETURN DATA TERBARU
             return response()->json([
                 'success' => true,
                 'message' => 'Materi berhasil diperbarui!',
-                'data' => $materi->load('files')
+                'data' => $materi->load('files') // Reload relasi files
             ]);
         } catch (\Exception $e) {
-            \Log::error('Gagal update materi: ' . $e->getMessage());
+            Log::error('Gagal update materi: ' . $e->getMessage());
             return response()->json([
                 'success' => false,
                 'message' => 'Terjadi kesalahan saat memperbarui materi.'
@@ -200,7 +233,7 @@ class MateriController extends Controller
                 'message' => 'Materi dan semua file berhasil dihapus.'
             ]);
         } catch (\Exception $e) {
-            \Log::error('Gagal hapus materi: ' . $e->getMessage());
+            Log::error('Gagal hapus materi: ' . $e->getMessage());
             return response()->json([
                 'success' => false,
                 'message' => 'Terjadi kesalahan saat menghapus materi.'
@@ -208,21 +241,4 @@ class MateriController extends Controller
         }
     }
 
-    // ===== HAPUS FILE TERKAIT =====
-    public function destroyFile($id)
-    {
-        $file = MateriFile::find($id);
-
-        if (!$file) {
-            return response()->json(['success' => false, 'message' => 'File tidak ditemukan.']);
-        }
-
-        if ($file->file_path && Storage::disk('public')->exists($file->file_path)) {
-            Storage::disk('public')->delete($file->file_path);
-        }
-
-        $file->delete();
-
-        return response()->json(['success' => true, 'message' => 'File berhasil dihapus.']);
-    }
 }
