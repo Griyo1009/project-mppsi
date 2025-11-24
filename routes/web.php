@@ -44,6 +44,10 @@ Route::prefix('admin')->controller(AdminController::class)->group(function () {
     Route::get('/lihat-materi/{id_materi}', 'lihatMateri')->name('admin.lihat-materi');
     Route::post('/lihat-materi/{id_materi}/komentar', 'kirimKomentar')->name('admin.komentar.kirim');
 
+    Route::post('/komentar/buka/{id_komentar}', [AdminController::class, 'bukaKomentar'])
+        ->name('admin.komentar.buka');
+
+
 });
 
 // ===== PENGUMUMAN ADMIN =====

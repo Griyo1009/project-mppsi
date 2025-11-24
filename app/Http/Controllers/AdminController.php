@@ -20,13 +20,27 @@ class AdminController extends Controller
             ->count();
         $materi_upload = Materi::count();
         // $komentar_count = Komentar::count();
+        $komentar_baru = Komentar::where('status_baca', 0)
+            ->latest('tgl_komen')
+            ->with('materi', 'user') // eager load untuk materi dan user
+            ->get();
 
         return view('admin.homepage', compact(
             'warga_aktif',
             'materi_upload',
-            // 'komentar_count'
+            'komentar_baru'
         ));
     }
+
+    public function bukaKomentar($id_komentar)
+    {
+        $komentar = Komentar::findOrFail($id_komentar);
+        $komentar->status_baca = 1;
+        $komentar->save();
+
+        return redirect()->route('admin.lihat-materi', $komentar->id_materi);
+    }
+
     public function pengumuman()
     {
         $pengumuman = Pengumuman::latest()->get();
@@ -51,6 +65,7 @@ class AdminController extends Controller
         return view('admin.lihat-materi', compact('materi'));
     }
 
+    //dipindah nanti
     public function kirimKomentar(Request $request, $id_materi)
     {
         $request->validate([

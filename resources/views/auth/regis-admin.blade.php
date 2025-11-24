@@ -2,9 +2,7 @@
 
 @section('content')
     <h4 class="mb-3 fw-bold text-primary">Daftar Akun</h4>
-    <form method="POST" action="
-                              {{-- {{ route('register.post') }} --}}
-                               ">
+    <form method="POST" action="#">
         @csrf
         <div class="form-floating mb-3">
             <input type="text" class="form-control" id="nik" name="nik" placeholder="NIK" required>
