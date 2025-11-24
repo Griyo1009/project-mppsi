@@ -4,7 +4,6 @@
 
 @push('styles')
   <style>
-    /* HEADER */
     .header-bg {
       background: url('{{ asset('images/login-bg.png') }}') center/cover no-repeat;
       height: 230px;
