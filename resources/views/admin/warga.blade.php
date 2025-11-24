@@ -62,8 +62,16 @@
   <div class="container-fluid mx-0 p-0 mb-5">
     <!-- Title -->
     <div class="section-box mx-0 mb-3 bg-white">
-      <h5 class="fw-bold gradient-text text-uppercase p-3 border-bottom shadow-sm px-3" style="color: #162660;">KELOLA
-        AKUN</h5>
+      <div class="d-flex justify-content-between align-items-center p-3 border-bottom shadow-sm">
+        <h5 class="fw-bold gradient-text text-uppercase mb-0" style="color: #162660;">KELOLA AKUN</h5>
+        <a href="{{ route('register.admin') }}" class="btn d-flex align-items-center mb-0"
+          style="background: linear-gradient(to right, #162660, #2D4EC6); color: #fff; border: none; padding: 0.5rem 1rem; border-radius: 0.375rem;">
+          <i class="bi bi-plus me-2"></i> <!-- ikon plus Bootstrap -->
+          <span>Daftar</span>
+        </a>
+
+      </div>
+
       <div class="section-header gradient-text fw-bold px-4 py-2 text-center">
         PERSETUJUAN AKUN
       </div>

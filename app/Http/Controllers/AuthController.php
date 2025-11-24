@@ -11,11 +11,13 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+    //tampilkan halaman login
     public function showLogin()
     {
         return view('auth.login');
     }
 
+    //fungsi login
     public function login(Request $request)
     {
         // Validasi input
@@ -57,6 +59,7 @@ class AuthController extends Controller
         }
     }
 
+    //fungsi log out
     public function logout(Request $request)
     {
         Auth::logout();
@@ -65,11 +68,13 @@ class AuthController extends Controller
         return redirect()->route('login')->with('swal_success', 'Kamu berhasil logout!');
     }
 
+    //tampilkan form register umum
     public function showRegister()
     {
         return view('auth.register');
     }
 
+    //query inser data register umum
     public function doRegister(Request $request)
     {
         // ✅ Validasi input
@@ -102,7 +107,7 @@ class AuthController extends Controller
                     return redirect()
                         ->route('login')->with('swal_success', 'Registrasi berhasil! Silakan login untuk melanjutkan.');
                 } else {
-                     return back()->with('swal_error', 'Gagal menyimpan data user.');
+                    return back()->with('swal_error', 'Gagal menyimpan data user.');
                 }
             } catch (\Exception $e) {
                 return back()->with('swal_error', 'Terjadi kesalahan: ' . $e->getMessage());
@@ -111,22 +116,57 @@ class AuthController extends Controller
 
         return response("Validasi gagal", 400);
     }
-    
-    public function showForgotPassword()
+
+    // public function showForgotPassword()
+    // {
+    //     return view('auth.forgot-password');
+    // }
+    // public function showRegisterWarga()
+    // {
+    //     return view('auth.register-warga');
+    // }
+
+    //tampilkan register admin 
+    public function showRegisterAdmin()
     {
-        return view('auth.forgot-password');
-    }
-    public function showRegisterWarga() {
-        return view('auth.register-warga');
-    }
-    public function registerWarga(Request $request) {
-        // logic registrasi warga di sini
-    }
-    public function showRegisterAdmin() {
-        return view('auth.register-admin');
+        return view('auth.regis-admin');
     }
 
-    public function registerAdmin(Request $request) {
-        // logic registrasi admin di sini
+    //query insert untukn regist admin (masih eror)
+
+    public function registerAdmin(Request $request)
+    {
+        // Validasi input
+        $validatedData = $request->validate([
+            'nik' => ['required', 'min:16', 'unique:users,NIK'],
+            'nama_lengkap' => ['required', 'max:50'],
+            'email' => ['required', 'email:rfc,dns', 'unique:users,email'],
+            'username' => ['required', 'min:5', 'max:20', 'unique:users,username'],
+            'password' => ['required', 'min:6', 'confirmed'],
+            'role' => ['required', 'in:0,1'],
+        ]);
+
+        try {
+            $user = User::create([
+                'NIK' => $validatedData['nik'],
+                'nama_lengkap' => $validatedData['nama_lengkap'],
+                'email' => $validatedData['email'],
+                'username' => $validatedData['username'],
+                'password' => Hash::make($validatedData['password']),
+                'role' => $validatedData['role'],
+                'status_akun' => 0, // default belum aktif
+                'foto_profil' => 'profile-default.jpg',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+
+            return redirect()->route('admin.home')->with('swal_success', 'Akun berhasil dibuat!');
+        } catch (\Exception $e) {
+            return back()->with('swal_error', 'Gagal menyimpan data: ' . $e->getMessage())->withInput();
+        }
     }
+
+
+
+
 }

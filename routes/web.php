@@ -6,6 +6,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PengumumanController;
 use App\Http\Controllers\WargaController;
 use App\Http\Controllers\MateriController;
+use App\Http\Controllers\KomentarController;
+
 use App\Models\User;  // <-- ini wajib
 
 // ===== Halaman Awal =====
@@ -42,7 +44,18 @@ Route::prefix('admin')->controller(AdminController::class)->group(function () {
 
     Route::get('/daftar-materi', 'daftarMateri')->name('admin.daftar-materi');
     Route::get('/lihat-materi/{id_materi}', 'lihatMateri')->name('admin.lihat-materi');
-    Route::post('/lihat-materi/{id_materi}/komentar', 'kirimKomentar')->name('admin.komentar.kirim');
+
+    Route::post('/lihat-materi/{id_materi}/komentar', [KomentarController::class, 'kirimKomentar'])
+        ->name('admin.komentar.kirim');
+
+    Route::post('/komentar/buka/{id_komentar}', [AdminController::class, 'bukaKomentar'])
+        ->name('admin.komentar.buka');
+
+
+    // Route::get('/register/admin', 'AuthController@showRegisterAdmin')->name('register.admin');
+
+    // Route::post('/register/admin', [AuthController::class, 'registerAdmin'])->name('register.admin.post');
+
 
 });
 

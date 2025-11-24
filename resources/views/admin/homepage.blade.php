@@ -61,69 +61,82 @@
     <hr>
 
     <!-- Komentar Section -->
+    <!-- Komentar Section -->
     <div class="px-4 pb-4">
-      <p class="mb-2 text-muted text-start">Komentar Belum Dibaca (
-        )
-      </p>
+      <p class="mb-2 text-muted text-start">Komentar Belum Dibaca ({{ $komentar_baru->count() }})</p>
 
       <ul class="list-group">
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-          <div>
-            <strong> nama
-            </strong> di materi
-
-          </div>
-          <div class="text-end">
-            <a href="#" class="btn btn-sm text-white"
-              style="background: linear-gradient(to bottom, #162660, #2D4EC6); border:2px solid #162660; border-radius:8px;">
-              Buka
-            </a>
-            <span class="text-muted small ms-2">
-            </span>
-          </div>
-        </li>
-        <li class="list-group-item text-muted">Tidak ada komentar baru.</li>
+        @forelse ($komentar_baru as $k)
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div>
+              <strong>{{ $k->user->username ?? 'Admin' }}</strong> di materi
+              <em>{{ $k->materi->judul_materi ?? '-' }}</em>
+            </div>
+            <div class="text-end">
+              <form action="{{ route('admin.komentar.buka', $k->id_komentar) }}" method="POST">
+                @csrf
+                <button type="submit" class="btn btn-sm text-white"
+                  style="background: linear-gradient(to bottom, #162660, #2D4EC6); border:2px solid #162660; border-radius:8px;">
+                  Buka
+                </button>
+              </form>
+            </div>
+          </li>
+        @empty
+          <li class="list-group-item text-muted">Tidak ada komentar baru.</li>
+        @endforelse
       </ul>
-
-
-
-
     </div>
 
 
-    <!-- AKSES CEPAT -->
-    <div class="container my-5">
-      <h6 class="fw-bold mb-4 text-uppercase text-muted">Akses Cepat</h6>
-      <div class="row g-4 justify-content-center">
-        <div class="col-md-3">
-          <div class="card shadow-sm border-0 h-100 text-center">
-            <img src="{{ asset('images/pengumuman.png') }}" class="card-img-top" alt="Pengumuman">
-            <div class="card-body">
-              <h6 class="fw-semibold">Pengumuman</h6>
-              <a href="pengumuman" class="btn btn-gradient-outline mt-2 px-4"><span>Tambah</span></a>
-            </div>
+
+
+
+  </div>
+
+
+  <!-- AKSES CEPAT -->
+  <div class="container my-5">
+    <h6 class="fw-bold mb-4 text-uppercase text-muted">Akses Cepat</h6>
+    <div class="row g-4 justify-content-center">
+      <div class="col-md-3">
+        <div class="card shadow-sm border-0 h-100 text-center">
+          <img src="{{ asset('images/pengumuman.png') }}" class="card-img-top" alt="Pengumuman">
+          <div class="card-body">
+            <h6 class="fw-semibold">Pengumuman</h6>
+            <a href="pengumuman" class="btn btn-gradient-outline mt-2 px-4"><span>Tambah</span></a>
           </div>
         </div>
+      </div>
 
-        <div class="col-md-3">
-          <div class="card shadow-sm border-0 h-100 text-center">
-            <img src="{{ asset('images/materi.png') }}" class="card-img-top" alt="Materi">
-            <div class="card-body">
-              <h6 class="fw-semibold">Materi</h6>
-              <a href="materi" class="btn btn-gradient-outline mt-2 px-4"><span>Tambah</span></a>
-            </div>
+      <div class="col-md-3">
+        <div class="card shadow-sm border-0 h-100 text-center">
+          <img src="{{ asset('images/materi.png') }}" class="card-img-top" alt="Materi">
+          <div class="card-body">
+            <h6 class="fw-semibold">Materi</h6>
+            <a href="materi" class="btn btn-gradient-outline mt-2 px-4"><span>Tambah</span></a>
           </div>
         </div>
+      </div>
 
-        <div class="col-md-3">
-          <div class="card shadow-sm border-0 h-100 text-center">
-            <img src="{{ asset('images/warga.png') }}" class="card-img-top" alt="Warga">
-            <div class="card-body">
-              <h6 class="fw-semibold">Warga</h6>
-              <a href="warga" class="btn btn-gradient-outline mt-2 px-4"><span>Kelola</span></a>
-            </div>
+      <div class="col-md-3">
+        <div class="card shadow-sm border-0 h-100 text-center">
+          <img src="{{ asset('images/warga.png') }}" class="card-img-top" alt="Warga">
+          <div class="card-body">
+            <h6 class="fw-semibold">Warga</h6>
+            <a href="warga" class="btn btn-gradient-outline mt-2 px-4"><span>Kelola</span></a>
           </div>
         </div>
       </div>
     </div>
+  </div>
+
+  <script>
+    window.addEventListener('pageshow', function (event) {
+      if (event.persisted || performance.getEntriesByType("navigation")[0].type === "back_forward") {
+        location.reload();
+      }
+    });
+  </script>
+
 @endsection

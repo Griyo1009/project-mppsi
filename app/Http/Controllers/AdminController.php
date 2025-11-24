@@ -12,61 +12,66 @@ use App\Models\Komentar;
 
 class AdminController extends Controller
 {
+    //menampilkan jumlah warga aktig, jumlah materi yang sudah di upload, dan komentar yang belum dibaca
     public function index()
     {
-        // Data dummy sementara, nanti bisa diganti pakai model
         $warga_aktif = User::where('role', 0)
             ->where('status_akun', '!=', 2)
             ->count();
         $materi_upload = Materi::count();
-        // $komentar_count = Komentar::count();
+        $komentar_baru = Komentar::where('status_baca', 0)
+            ->latest('tgl_komen')
+            ->with('materi', 'user')
+            ->get();
 
         return view('admin.homepage', compact(
             'warga_aktif',
             'materi_upload',
-            // 'komentar_count'
+            'komentar_baru'
         ));
     }
-    public function pengumuman()
+
+    // untuk membuka komentar terbaru
+    public function bukaKomentar($id_komentar)
     {
-        $pengumuman = Pengumuman::latest()->get();
-        return view('admin.pengumuman', compact('pengumuman'));
+        $komentar = Komentar::findOrFail($id_komentar);
+        $komentar->status_baca = 1;
+        $komentar->save();
+
+        return redirect()->route('admin.lihat-materi', $komentar->id_materi);
     }
 
-    public function materi()
-    {
-        $materi = Materi::latest()->get(); // ambil semua materi
-        return view('admin.materi', compact('materi'));
+    //////////////////////////////masih ga tau ini untuk apa makanya ku komentarin
+    // public function pengumuman()
+    // {
+    //     $pengumuman = Pengumuman::latest()->get();
+    //     return view('admin.pengumuman', compact('pengumuman'));
+    // }
 
-    }
+    ///////////////////////////////masih ga tau ini untuk apa makanya ku komentarin
+    // public function materi()
+    // {
+    //     $materi = Materi::latest()->get(); // ambil semua materi
+    //     return view('admin.materi', compact('materi'));
+
+    // }
+
+    //menampilkan daftar materi di page daftar materi
     public function daftarMateri()
     {
         $materi = Materi::with('files')->orderBy('created_at', 'desc')->get(); // sortir berdasarkan tanggal
         return view('admin.daftar-materi', compact('materi'));
     }
 
+    //menampilkan detail materi
     public function lihatMateri($id_materi)
     {
         $materi = Materi::with('files', 'komentar.user')->findOrFail($id_materi);
         return view('admin.lihat-materi', compact('materi'));
     }
 
-    public function kirimKomentar(Request $request, $id_materi)
-    {
-        $request->validate([
-            'isi_komen' => 'required|string|max:1000',
-        ]);
 
-        Komentar::create([
-            'id_materi' => $id_materi,
-            'id_user' => auth()->id(), // Admin yang login
-            'isi_komen' => $request->isi_komen,
-            'tgl_komen' => now(),
-        ]);
-
-        return redirect()->route('admin.lihat-materi', $id_materi)->with('success', 'Komentar berhasil dikirim');
-    }
-
+    //untuk bagian page manage akun
     public function warga()
     {
         // Ambil akun yang belum disetujui (status_akun = 0)
