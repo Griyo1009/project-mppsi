@@ -62,7 +62,34 @@
     <hr>
 
     <!-- Komentar Section -->
-    
+    <div class="px-4 pb-4">
+      <p class="mb-2 text-muted text-start">Komentar Belum Dibaca (
+        )
+      </p>
+
+      <ul class="list-group">
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <div>
+            <strong> nama
+            </strong> di materi
+
+          </div>
+          <div class="text-end">
+            <a href="#" class="btn btn-sm text-white"
+              style="background: linear-gradient(to bottom, #162660, #2D4EC6); border:2px solid #162660; border-radius:8px;">
+              Buka
+            </a>
+            <span class="text-muted small ms-2">
+            </span>
+          </div>
+        </li>
+        <li class="list-group-item text-muted">Tidak ada komentar baru.</li>
+      </ul>
+
+
+
+
+    </div>
 
 
     <!-- AKSES CEPAT -->

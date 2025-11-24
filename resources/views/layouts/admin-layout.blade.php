@@ -293,6 +293,13 @@
                         <a class="nav-link {{ Request::is('materi') ? 'active' : '' }}" href="/admin/materi">Materi</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link {{ Request::is('admin/daftar-materi*') ? 'active' : '' }}"
+                            href="{{ route('admin.daftar-materi') }}">
+                            daftar Materi
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
                         <a class="nav-link {{ Request::is('warga') ? 'active' : '' }}" href="/admin/warga">Warga</a>
                     </li>
 

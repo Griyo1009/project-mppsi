@@ -6,6 +6,7 @@ use App\Models\Materi;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Pengumuman;
+use App\Models\Komentar;
 
 
 
@@ -34,8 +35,38 @@ class AdminController extends Controller
 
     public function materi()
     {
-        return view('admin.materi');
+        $materi = Materi::latest()->get(); // ambil semua materi
+        return view('admin.materi', compact('materi'));
+
     }
+    public function daftarMateri()
+    {
+        $materi = Materi::with('files')->orderBy('created_at', 'desc')->get(); // sortir berdasarkan tanggal
+        return view('admin.daftar-materi', compact('materi'));
+    }
+
+    public function lihatMateri($id_materi)
+    {
+        $materi = Materi::with('files', 'komentar.user')->findOrFail($id_materi);
+        return view('admin.lihat-materi', compact('materi'));
+    }
+
+    public function kirimKomentar(Request $request, $id_materi)
+    {
+        $request->validate([
+            'isi_komen' => 'required|string|max:1000',
+        ]);
+
+        Komentar::create([
+            'id_materi' => $id_materi,
+            'id_user' => auth()->id(), // Admin yang login
+            'isi_komen' => $request->isi_komen,
+            'tgl_komen' => now(),
+        ]);
+
+        return redirect()->route('admin.lihat-materi', $id_materi)->with('success', 'Komentar berhasil dikirim');
+    }
+
     public function warga()
     {
         // Ambil akun yang belum disetujui (status_akun = 0)
