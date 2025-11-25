@@ -298,7 +298,7 @@
                 class="bi bi-caret-down-fill ps-2"></i>
             </a>
             <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="userDropdown">
-              <li><a class="dropdown-item" href="/admin/profil">Profil</a></li>
+              <li><a class="dropdown-item" href="/warga/profil-warga">Profil</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>

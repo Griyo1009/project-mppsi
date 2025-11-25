@@ -1,14 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\User;  // <-- ini wajib
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\PengumumanController;
 use App\Http\Controllers\WargaController;
 use App\Http\Controllers\MateriController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\KomentarController;
-
-use App\Models\User;  // <-- ini wajib
+use App\Http\Controllers\PengumumanController;
 
 // ===== Halaman Awal =====
 Route::get('/', function () {
@@ -56,8 +56,10 @@ Route::prefix('admin')->controller(AdminController::class)->group(function () {
 
     // Route::post('/register/admin', [AuthController::class, 'registerAdmin'])->name('register.admin.post');
 
-
 });
+// ===== PROFILE UPDATE =====
+Route::put('/profile/update', [ProfileController::class, 'update'])->name('admin.profile.update');
+Route::put('/profile/photo', [ProfileController::class, 'updatePhoto'])->name('admin.profile.update.photo');
 
 // ===== PENGUMUMAN ADMIN =====
 Route::prefix('admin/pengumuman')->group(function () {

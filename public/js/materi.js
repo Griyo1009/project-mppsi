@@ -88,83 +88,82 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // ===== SHOW EDIT MODAL =====
-    // ===== SHOW EDIT MODAL =====
-listMateri?.addEventListener("click", async (e) => {
-    // Cek apakah yang diklik adalah tombol edit atau icon di dalamnya
-    const btn = e.target.closest(".btn-edit");
-    if (!btn) return;
-    
-    const id = btn.dataset.id;
+    listMateri?.addEventListener("click", async (e) => {
+        // Cek apakah yang diklik adalah tombol edit atau icon di dalamnya
+        const btn = e.target.closest(".btn-edit");
+        if (!btn) return;
+        
+        const id = btn.dataset.id;
 
-    try {
-        const res = await fetch(`/admin/materi/show/${id}`);
-        const data = await res.json();
+        try {
+            const res = await fetch(`/admin/materi/show/${id}`);
+            const data = await res.json();
 
-        if (res.ok && data.success) {
-            deletedFiles = []; // Reset array file yang dihapus
+            if (res.ok && data.success) {
+                deletedFiles = []; // Reset array file yang dihapus
 
-            // Isi form text dasar
-            document.getElementById("edit_id_materi").value = data.data.id_materi;
-            document.getElementById("edit_judul").value = data.data.judul_materi;
-            document.getElementById("edit_deskripsi").value = data.data.deskripsi ?? "";
+                // Isi form text dasar
+                document.getElementById("edit_id_materi").value = data.data.id_materi;
+                document.getElementById("edit_judul").value = data.data.judul_materi;
+                document.getElementById("edit_deskripsi").value = data.data.deskripsi ?? "";
 
-            // HAPUS BARIS DI BAWAH INI (Penyebab Error)
-            // document.getElementById("edit_link_url").value = data.data.link_url ?? ""; 
+                // HAPUS BARIS DI BAWAH INI (Penyebab Error)
+                // document.getElementById("edit_link_url").value = data.data.link_url ?? ""; 
 
-            // --- Render File & Link yang Sudah Ada ---
-            const fileContainer = document.getElementById("existingFiles");
-            fileContainer.innerHTML = "";
+                // --- Render File & Link yang Sudah Ada ---
+                const fileContainer = document.getElementById("existingFiles");
+                fileContainer.innerHTML = "";
 
-            if (data.data.files && data.data.files.length > 0) {
-                data.data.files.forEach(file => {
-                    const div = document.createElement("div");
-                    div.classList.add("d-flex", "justify-content-between", "align-items-center", "mb-1", "p-2", "border-bottom");
-                    
-                    // Cek tipe untuk menentukan tampilan
-                    let fileDisplay = '';
-                    if(file.tipe_file === 'link') {
-                        fileDisplay = `<i class="bi bi-link-45deg me-2 text-primary"></i> <a href="${file.link_url}" target="_blank" class="text-truncate" style="max-width: 300px;">${file.link_url}</a>`;
-                    } else {
-                        fileDisplay = `<i class="bi bi-file-earmark me-2 text-secondary"></i> <a href="/storage/${file.file_path}" target="_blank" class="text-truncate" style="max-width: 300px;">${file.file_path.split('/').pop()}</a>`;
-                    }
+                if (data.data.files && data.data.files.length > 0) {
+                    data.data.files.forEach(file => {
+                        const div = document.createElement("div");
+                        div.classList.add("d-flex", "justify-content-between", "align-items-center", "mb-1", "p-2", "border-bottom");
+                        
+                        // Cek tipe untuk menentukan tampilan
+                        let fileDisplay = '';
+                        if(file.tipe_file === 'link') {
+                            fileDisplay = `<i class="bi bi-link-45deg me-2 text-primary"></i> <a href="${file.link_url}" target="_blank" class="text-truncate" style="max-width: 300px;">${file.link_url}</a>`;
+                        } else {
+                            fileDisplay = `<i class="bi bi-file-earmark me-2 text-secondary"></i> <a href="/storage/${file.file_path}" target="_blank" class="text-truncate" style="max-width: 300px;">${file.file_path.split('/').pop()}</a>`;
+                        }
 
-                    div.innerHTML = `
-                        <div class="d-flex align-items-center">
-                            ${fileDisplay}
-                        </div>
-                        <button type="button" class="btn btn-sm btn-outline-danger btn-remove-file" data-id="${file.id_file}">
-                            <i class="bi bi-trash"></i>
-                        </button>
-                    `;
-                    fileContainer.appendChild(div);
-                });
+                        div.innerHTML = `
+                            <div class="d-flex align-items-center">
+                                ${fileDisplay}
+                            </div>
+                            <button type="button" class="btn btn-sm btn-outline-danger btn-remove-file" data-id="${file.id_file}">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        `;
+                        fileContainer.appendChild(div);
+                    });
+                } else {
+                    fileContainer.innerHTML = `<em class="text-muted">Belum ada file atau link tersimpan.</em>`;
+                }
+
+                // Reset input form tambahan (agar kosong saat modal dibuka)
+                document.getElementById("editFileWrapper").innerHTML = `
+                    <div class="input-group mb-2">
+                        <input type="file" name="new_files[]" class="form-control">
+                        <button type="button" class="btn btn-outline-secondary btn-add-edit-file"><i class="bi bi-plus"></i></button>
+                    </div>`;
+                
+                document.getElementById("editLinkWrapper").innerHTML = `
+                    <div class="input-group mb-2">
+                        <input type="text" name="new_links[]" class="form-control" placeholder="Masukkan link materi">
+                        <button type="button" class="btn btn-outline-secondary btn-add-edit-link"><i class="bi bi-plus"></i></button>
+                    </div>`;
+
+                // Tampilkan Modal
+                new bootstrap.Modal(document.getElementById("editMateriModal")).show();
             } else {
-                fileContainer.innerHTML = `<em class="text-muted">Belum ada file atau link tersimpan.</em>`;
+                Swal.fire("Gagal", data.message || "Data tidak ditemukan", "error");
             }
-
-            // Reset input form tambahan (agar kosong saat modal dibuka)
-            document.getElementById("editFileWrapper").innerHTML = `
-                <div class="input-group mb-2">
-                    <input type="file" name="new_files[]" class="form-control">
-                    <button type="button" class="btn btn-outline-secondary btn-add-edit-file"><i class="bi bi-plus"></i></button>
-                </div>`;
-            
-            document.getElementById("editLinkWrapper").innerHTML = `
-                <div class="input-group mb-2">
-                    <input type="text" name="new_links[]" class="form-control" placeholder="Masukkan link materi">
-                    <button type="button" class="btn btn-outline-secondary btn-add-edit-link"><i class="bi bi-plus"></i></button>
-                </div>`;
-
-            // Tampilkan Modal
-            new bootstrap.Modal(document.getElementById("editMateriModal")).show();
-        } else {
-            Swal.fire("Gagal", data.message || "Data tidak ditemukan", "error");
+        } catch (error) {
+            console.error(error); // Debugging di console browser
+            Swal.fire("Error", "Gagal mengambil data materi. Cek console browser.", "error");
         }
-    } catch (error) {
-        console.error(error); // Debugging di console browser
-        Swal.fire("Error", "Gagal mengambil data materi. Cek console browser.", "error");
-    }
-});
+    });
 
     // ===== UPDATE MATERI =====
     document.getElementById("formEditMateri")?.addEventListener("submit", async (e) => {
@@ -288,25 +287,30 @@ listMateri?.addEventListener("click", async (e) => {
 
     // ===== ADD NEW CARD AFTER CREATE =====
     function appendMateri(materi) {
+        const headingElement = listMateri.querySelector('h6');
         const card = document.createElement("div");
         card.classList.add("materi-card", "mb-4");
-        card.innerHTML = `
-            <div class="d-flex justify-content-between align-items-start">
-                <div>
-                    <h5 class="fw-bold">${materi.judul_materi}</h5>
-                    <p class="text-muted mb-2">${materi.deskripsi}</p>
-                    <small class="text-secondary d-block mb-2">Diupload pada ${materi.tgl_up}</small>
+        if (headingElement) {
+            card.innerHTML = `
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <h5 class="fw-bold">${materi.judul_materi}</h5>
+                        <p class="text-muted mb-2">${materi.deskripsi}</p>
+                        <small class="text-secondary d-block mb-2">Diupload pada ${materi.tgl_up}</small>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-warning text-white btn-sm btn-edit" data-id="${materi.id_materi}">Edit</button>
+                        <button class="btn btn-danger btn-sm btn-delete" data-id="${materi.id_materi}">Hapus</button>
+                    </div>
                 </div>
-                <div class="d-flex gap-2">
-                    <button class="btn btn-warning text-white btn-sm btn-edit" data-id="${materi.id_materi}">Edit</button>
-                    <button class="btn btn-danger btn-sm btn-delete" data-id="${materi.id_materi}">Hapus</button>
+                <div class="mt-3">
+                    ${materi.files.map(f => renderFileItem(f)).join("")}
                 </div>
-            </div>
-            <div class="mt-3">
-                ${materi.files.map(f => renderFileItem(f)).join("")}
-            </div>
-        `;
-        listMateri.prepend(card);
+            `;
+            headingElement.insertAdjacentElement('afterend', card);
+        } else {
+            // Fallback
+            listMateri.prepend(card);
+        }
     }
 });
-    
