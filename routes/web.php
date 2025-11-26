@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Middleware\AdminAccess;
+use App\Http\Middleware\UserAccess; 
+use App\Http\Middleware\CheckSession;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;  // <-- ini wajib
 use App\Http\Controllers\AuthController;
@@ -10,6 +13,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\KomentarController;
 use App\Http\Controllers\PengumumanController;
 
+
 // ===== Halaman Awal =====
 Route::get('/', function () {
     return view('welcome');
@@ -18,13 +22,13 @@ Route::get('/', function () {
 // ===== AUTH SECTION =====
 Route::controller(AuthController::class)->group(function () {
     // Login & Logout
-    Route::get('/login', 'showLogin')->name('login');
-    Route::post('/login', 'login')->name('login.post');
+    Route::get('/login', 'showLogin')->name('login')->middleware(CheckSession::class);
+    Route::post('/login', 'login')->name('login.post')->middleware(CheckSession::class);
     Route::post('/logout', 'logout')->name('logout');
 
     // Register umum
-    Route::get('/register', 'showRegister')->name('register');
-    Route::post('/register', 'doRegister')->name('register.post');
+    Route::get('/register', 'showRegister')->name('register')->middleware(CheckSession::class);
+    Route::post('/register', 'doRegister')->name('register.post')->middleware(CheckSession::class);
 
     Route::get('/register/admin', 'showRegisterAdmin')->name('register.admin');
     Route::post('/register/admin', 'registerAdmin')->name('register.admin.post');
@@ -35,11 +39,11 @@ Route::controller(AuthController::class)->group(function () {
 
 // ===== ADMIN SECTION =====
 Route::prefix('admin')->controller(AdminController::class)->group(function () {
-    Route::get('/home', 'index')->name('admin.home');
-    Route::get('/pengumuman', 'pengumuman')->name('admin.pengumuman');
-    Route::get('/materi', 'materi')->name('admin.materi');
-    Route::get('/warga', 'warga')->name('admin.warga');
-    Route::get('/profil', 'profil')->name('admin.profil');
+    Route::get('/home', 'index')->name('admin.home')->middleware(AdminAccess::class);
+    Route::get('/pengumuman', 'pengumuman')->name('admin.pengumuman')->middleware(AdminAccess::class);
+    Route::get('/materi', 'materi')->name('admin.materi')->middleware(AdminAccess::class);
+    Route::get('/warga', 'warga')->name('admin.warga')->middleware(AdminAccess::class);
+    Route::get('/profil', 'profil')->name('admin.profil')->middleware(AdminAccess::class);
     // Route::get('/materi-lihat/{id_materi}', 'materi_lihat')->name('materi-lihat');
 
     Route::get('/daftar-materi', 'daftarMateri')->name('admin.daftar-materi');
@@ -92,12 +96,12 @@ Route::put('/admin/warga/buka/{id_user}', [AdminController::class, 'buka'])->nam
 
 // ===== WARGA SECTION =====
 Route::prefix('warga')->controller(WargaController::class)->group(function () {
-    Route::get('/homepage', 'homepage')->name('warga.homepage');
-    Route::get('/pengumuman', 'pengumuman')->name('warga.pengumuman');
-    Route::get('/materi', 'materi')->name('warga.materi');
-    Route::get('/lihat-materi/{id_materi}', 'lihat_materi')->name('warga.lihat-materi');
-    Route::get('/profil-warga', 'profil_warga')->name('warga.profil-warga');
-    Route::get('/edit-profil-warga', 'edit_profil_warga')->name('warga.edit-profil-warga');
+    Route::get('/homepage', 'homepage')->name('warga.homepage')->middleware(UserAccess::class);
+    Route::get('/pengumuman', 'pengumuman')->name('warga.pengumuman')->middleware(UserAccess::class);
+    Route::get('/materi', 'materi')->name('warga.materi')->middleware(UserAccess::class);
+    Route::get('/lihat-materi/{id_materi}', 'lihat_materi')->name('warga.lihat-materi')->middleware(UserAccess::class);
+    Route::get('/profil-warga', 'profil_warga')->name('warga.profil-warga')->middleware(UserAccess::class);
+    Route::get('/edit-profil-warga', 'edit_profil_warga')->name('warga.edit-profil-warga')->middleware(UserAccess::class);
     Route::post('/warga/komentar/{id_materi}', [WargaController::class, 'kirimKomentar'])
         ->name('warga.komentar.kirim');
 

@@ -168,6 +168,9 @@
       background: linear-gradient(to bottom, #1e7e34, #28a745);
       border-color: #1e7e34;
     }
+    .dropdown-item:focus {
+      background-color: transparent !important; /* Menghilangkan warna latar belakang */
+    }
 
 
     /* ====== FOOTER ====== */
@@ -303,7 +306,8 @@
                 <hr class="dropdown-divider">
               </li>
               <li>
-                <form action="{{ url('/') }}" method="GET" class="m-0">
+                <form action="{{ route('logout') }}" method="POST" class="m-0">
+                  @csrf
                   <button type="submit" class="dropdown-item text-danger">
 
                     <i class="bi bi-box-arrow-right me-2"></i>Log Out
