@@ -16,11 +16,17 @@ class WargaController extends Controller
     }
     public function pengumuman()
     {
-        $pengumuman = Pengumuman::latest()->first();
-        $pengumuman_all = Pengumuman::latest()->get();
-        $materi = Materi::latest()->take(6)->get();
-        return view('warga.pengumuman', compact('pengumuman', 'pengumuman_all'));
+    $allPengumuman = Pengumuman::latest()->get();
 
+    $pengumumanTerbaru = null;
+    $pengumumanTerdahulu = collect();
+
+    if ($allPengumuman->isNotEmpty()) {
+        $pengumumanTerbaru = $allPengumuman->first();
+        $pengumumanTerdahulu = $allPengumuman->slice(1);
+    }
+    return view('warga.pengumuman', compact('pengumumanTerbaru', 'pengumumanTerdahulu'));
+    
     }
     public function materi()
     {

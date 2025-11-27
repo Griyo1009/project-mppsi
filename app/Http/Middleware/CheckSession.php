@@ -29,7 +29,7 @@ class CheckSession
                 // 3. Logika Pengalihan Berdasarkan Role (0=User Biasa, 1=Admin)
                 if ($user->role == 1) {
                     // Jika role adalah Admin, alihkan ke halaman Admin
-                    return redirect('/admin/dashboard'); 
+                    return redirect('/admin/home'); 
                 } 
                 
                 // Jika role adalah User Biasa (0) atau role lain yang bukan admin

@@ -32,9 +32,21 @@
 
         /* ====== NAVBAR ====== */
         .navbar-custom {
-            position: relative;
+            position: fixed; 
+            top: 0;
+            width: 100%;
+            z-index: 1030; 
+            transition: top 0.3s; 
             background: linear-gradient(to bottom, #162660, #2D4EC6);
             padding: 0;
+        }
+
+        .navbar-hidden {
+            top: -100px; /* Dorong navbar ke atas (keluar dari viewport) */
+        }
+
+        main {
+            padding-top: 70px; /* Sesuaikan dengan tinggi navbar Anda */
         }
 
         .navbar-custom .navbar-toggler {
@@ -118,13 +130,6 @@
             color: #fff;
         }
 
-        .btn-light:hover {
-            background: linear-gradient(to bottom, #162660, #2D4EC6);
-            color: white;
-            -webkit-background-clip: unset;
-            -webkit-text-fill-color: white;
-        }
-
         .btn-gradient-outline {
             border: 1px solid #2D4EC6;
             border-color: #2D4EC6;
@@ -168,7 +173,10 @@
             background: linear-gradient(to bottom, #1e7e34, #28a745);
             border-color: #1e7e34;
         }
-
+        .dropdown-item:focus {
+            background-color: transparent !important;
+            /* Menghilangkan warna latar belakang */
+        }
 
         /* ====== FOOTER ====== */
         footer {
@@ -268,9 +276,9 @@
 <body class="d-flex flex-column min-vh-100">
 
     <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg navbar-custom shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-custom shadow-sm" id="mainNavbar">
         <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="#">
+            <a class="navbar-brand d-flex align-items-center" href="{{ url('warga/homepage') }}">
                 <img style="width: 35px; height: 60.71px;" src="{{ asset('images/logo.png') }}" alt="ERT07"
                     class="me-2">
             </a>
@@ -282,25 +290,25 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-center gap-3">
                     <li class="nav-item ">
-                        <a class="nav-link {{--{{ Request::is('/') ? 'active' : '' }}--}} "
+                        <a class="nav-link {{ Request::is('admin/home') ? 'active' : '' }} "
                             href="/admin/home">Beranda</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::is('pengumuman') ? 'active' : '' }} "
+                        <a class="nav-link {{ Request::is('admin/pengumuman') ? 'active' : '' }} "
                             href="/admin/pengumuman">Pengumuman</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::is('materi') ? 'active' : '' }}" href="/admin/materi">Materi</a>
+                        <a class="nav-link {{ Request::is('admin/materi') ? 'active' : '' }}" href="/admin/materi">Materi</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ Request::is('admin/daftar-materi*') ? 'active' : '' }}"
                             href="{{ route('admin.daftar-materi') }}">
-                            daftar Materi
+                            Daftar Materi
                         </a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::is('warga') ? 'active' : '' }}" href="/admin/warga">Warga</a>
+                        <a class="nav-link {{ Request::is('admin/warga') ? 'active' : '' }}" href="/admin/warga">Warga</a>
                     </li>
 
                     {{-- Dropdown Profil --}}
@@ -316,9 +324,10 @@
                                 <hr class="dropdown-divider">
                             </li>
                             <li>
-                                <form action="{{ url('/') }}" method="GET" class="m-0">
+                                <form action="{{ route('logout') }}" method="POST" class="m-0">
                                     @csrf
                                     <button type="submit" class="dropdown-item text-danger">
+
                                         <i class="bi bi-box-arrow-right me-2"></i>Log Out
                                     </button>
                                 </form>
@@ -354,6 +363,29 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @stack('scripts')
+    <script>
+        //untuk navbar
+        document.addEventListener('DOMContentLoaded', function() {
+            const navbar = document.getElementById('mainNavbar');
+            let lastScrollTop = 0;
+            const navbarHeight = navbar.offsetHeight;
+
+            window.addEventListener('scroll', function() {
+                let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+                // Cek jika scroll ke bawah
+                if (currentScroll > lastScrollTop && currentScroll > navbarHeight) {
+                    // Scroll Down: Sembunyikan navbar
+                    navbar.classList.add('navbar-hidden');
+                } else {
+                    // Scroll Up atau di bagian paling atas: Tampilkan navbar
+                    navbar.classList.remove('navbar-hidden');
+                }
+                
+                lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // Untuk mencegah nilai negatif
+            }, false);
+        });
+    </script>
 </body>
 
 </html>

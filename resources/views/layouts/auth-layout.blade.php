@@ -181,6 +181,7 @@
         linear-gradient(to bottom, #162660, #2D4EC6),
         linear-gradient(to bottom, #162660, #2D4EC6);
       transform: translateY(-2px);
+      color: white;
     }
 
     .btn-gradient-outline:hover span {
@@ -220,14 +221,14 @@
         <div class="image-wrapper">
           <img src="{{ asset('images/login-bg.png') }}" alt="Background ERT07" class="login-image">
 
-          <a href="{{ url()->previous() }}" class="btn-back d-flex align-items-center">
+          <a href="/" class="btn-back d-flex align-items-center">
             <i class="bi bi-arrow-left me-2"></i> Kembali
           </a>
 
           <div class="overlay">
             <img src="{{ asset('images/logo.png') }}" alt="Logo ERT07" class="overlay-logo mb-2">
             <h2 class="fw-bold text-white mb-4">ERT07</h2>
-            <p class="text-white">Ingin Mendaftar sebagai Apa?</p>
+            <p class="text-white fw-semibold">"Dari Warga, Oleh Warga, untuk Ilmu Bersama"</p>
           </div>
         </div>
       </div>

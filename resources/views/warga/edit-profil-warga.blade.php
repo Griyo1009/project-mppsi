@@ -22,7 +22,7 @@
                 <form action="" method="">
                     @csrf
                     <input type="file" name="foto" id="fotoinput" class="d-none" accept="image/*">
-                    <label for="fotoinput" class="btn btn-sm fw-semibold text-primary"
+                    <label for="fotoinput" class="btn btn-sm fw-semibold gradient-text"
                         style="background-color : white; border-radius: 4px; cursor: pointer;">Upload Foto</label>
                 </form>
 
@@ -30,7 +30,7 @@
         </div>
     </div>
 
-    <h4 class=" pt-2 text-primary" style="margin-left:3rem;">Biodata Diri</h4>
+    <h4 class=" pt-2 gradient-text" style="margin-left:3rem;">Biodata Diri</h4>
     <div class="py-3" style="background: linear-gradient(to bottom, #162660, #2D4EC6);">
 
         <div style="background-color: #D1D4DB; border-radius: 5px; padding-bottom: 20px;" class="mx-4 px-3">

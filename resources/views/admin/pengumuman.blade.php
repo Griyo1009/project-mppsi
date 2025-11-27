@@ -1,6 +1,6 @@
 @extends('layouts.admin-layout')
 
-@section('title', 'Dashboard Admin RT 07')
+@section('title', 'Pengumuman | Dashboard Admin RT 07')
 
 @push('styles')
     <style>

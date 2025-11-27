@@ -1,7 +1,7 @@
 @extends('layouts.auth-layout')
 
 @section('content')
-  <h4 class="mb-3 fw-bold text-primary">Daftar Akun</h4>
+  <h4 class="mb-3 fw-bold gradient-text">Daftar Akun</h4>
 
   @if (session('success'))
     <div class="alert alert-success">{{ session('success') }}</div>
@@ -37,7 +37,7 @@
     </div>
     <div class="form-floating mb-3">
       <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
-      <label for="password">Password</label>
+      <label for="password">Password <i>(min 8 karakter)</i></label>
     </div>  
     <div class="form-floating mb-4">
       <input type="password" class="form-control" id="password_confirmation" name="password_confirmation"
@@ -45,5 +45,11 @@
       <label for="password_confirmation">Ulangi Password</label>
     </div>
     <button type="submit" class="btn btn-gradient-outline w-100 mb-2"><span>Daftar</span></button>
+    <div class="text-center mt-3">
+      <small>
+        sudah punya akun?
+        <a href="{{ route('login') }}" class="fw-semibold gradient-text">Login</a>
+      </small>
+    </div>
   </form>
 @endsection

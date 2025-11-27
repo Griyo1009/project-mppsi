@@ -17,7 +17,7 @@ use App\Http\Controllers\PengumumanController;
 // ===== Halaman Awal =====
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 // ===== AUTH SECTION =====
 Route::controller(AuthController::class)->group(function () {
@@ -42,7 +42,7 @@ Route::prefix('admin')->controller(AdminController::class)->group(function () {
     Route::get('/home', 'index')->name('admin.home')->middleware(AdminAccess::class);
     Route::get('/pengumuman', 'pengumuman')->name('admin.pengumuman')->middleware(AdminAccess::class);
     Route::get('/materi', 'materi')->name('admin.materi')->middleware(AdminAccess::class);
-    Route::get('/warga', 'warga')->name('admin.warga')->middleware(AdminAccess::class);
+    Route::get('/warga', 'warga')->name('admin.warga')->middleware(AdminAccess::class)  ;
     Route::get('/profil', 'profil')->name('admin.profil')->middleware(AdminAccess::class);
     // Route::get('/materi-lihat/{id_materi}', 'materi_lihat')->name('materi-lihat');
 

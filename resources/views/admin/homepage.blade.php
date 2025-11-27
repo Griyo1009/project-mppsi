@@ -75,8 +75,7 @@
             <div class="text-end">
               <form action="{{ route('admin.komentar.buka', $k->id_komentar) }}" method="POST">
                 @csrf
-                <button type="submit" class="btn btn-sm text-white"
-                  style="background: linear-gradient(to bottom, #162660, #2D4EC6); border:2px solid #162660; border-radius:8px;">
+                <button type="submit" class="btn btn-sm text-white btn-warning">
                   Buka
                 </button>
               </form>
@@ -96,7 +95,7 @@
 
 
   <!-- AKSES CEPAT -->
-  <div class="container my-5">
+  {{-- <div class="container my-5">
     <h6 class="fw-bold mb-4 text-uppercase text-muted">Akses Cepat</h6>
     <div class="row g-4 justify-content-center">
       <div class="col-md-3">
@@ -129,8 +128,8 @@
         </div>
       </div>
     </div>
-  </div>
-
+  </div> --}}
+ 
   <script>
     window.addEventListener('pageshow', function (event) {
       if (event.persisted || performance.getEntriesByType("navigation")[0].type === "back_forward") {

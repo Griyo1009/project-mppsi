@@ -20,12 +20,12 @@ class AdminAccess
         if (Auth::check()) {
             // Cek role user
             // 1 = Admin
-            if (Auth::user()->role == 1) {
+            if (Auth::user()->role== 1) {
                 return $next($request);
             }
         }
         
         // Jika tidak login atau bukan admin, alihkan ke halaman utama
-        return redirect('/')->with('error', 'Anda tidak memiliki akses ke halaman ini.');
+        return redirect('/login')->with('error', 'Anda tidak memiliki akses ke halaman ini.');
     }
 }
